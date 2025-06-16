@@ -17,9 +17,10 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <!-- Chart.js CDN -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="scripts/script.js"></script>
         <style>
             body {
                 background: #f5f7ff;
@@ -74,6 +75,24 @@
                 object-fit: cover;
                 border-radius: 8px;
             }
+
+            .calendar {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 6px;
+            }
+
+            .calendar .day-box {
+                height: 100px;
+                border-radius: 8px;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 500;
+                font-size: 0.9rem;
+                transition: background-color 0.3s;
+            }
         </style>
     </head>
 
@@ -81,34 +100,54 @@
         <div class="container-fluid p-0 m-0">
             <div class="row">
                 <!-- Sidebar -->
-                <div class="col-md-2 sidebar d-flex flex-column">
+                <div
+                    class="sidebar d-flex flex-column position-fixed bg-white p-3"
+                    id="sidebar"
+                    style="
+                        top: 0;
+                        left: 0;
+                        height: 100vh;
+                        width: 260px;
+                        z-index: 1030;
+                    "
+                >
                     <div class="mb-4 text-center">
-                        <h6 class="fw-bold">DJUBO</h6>
-                        <small>Hospitality Since 1997</small>
+                        <img
+                            src="assets/djubo-cropped.png"
+                            alt="DJUBO Logo"
+                            style="max-width: 100%; height: 60px"
+                        />
                     </div>
+
                     <nav class="nav flex-column">
-                        <a class="nav-link" href="#"
-                            ><i class="fas fa-clipboard-check me-2"></i>Mark
-                            Check In</a
-                        >
+                        <a id="checkin-btn" class="nav-link">
+                            <i class="fas fa-clipboard-check me-2"></i>
+                            <strong>CHECK IN</strong>
+                        </a>
 
-                        <a class="nav-link mb-5" href="#"
-                            ><i class="fas fa-clipboard-check me-2"></i>Mark
-                            Check Out</a
-                        >
+                        <a class="nav-link mb-5">
+                            <i class="fas fa-lock me-2"></i>
+                            <strong>CHECK OUT</strong>
+                        </a>
 
-                        <a class="nav-link" href="#"
-                            ><i class="fas fa-bell me-2"></i>Notifications</a
-                        >
+                        <a class="nav-link mb-5">
+                            <i class="fas fa-mug-hot me-2"></i>
+                            <strong>BREAK</strong>
+                        </a>
 
-                        <a class="nav-link" href="#"
-                            ><i class="fas fa-cog me-2"></i>Edit Account</a
-                        >
+                        <a class="nav-link">
+                            <i class="fas fa-rotate-right me-2"></i>Refresh
+                        </a>
 
-                        <a class="nav-link" href="#"
-                            ><i class="fas fa-sign-out-alt me-2"></i>LogOut</a
-                        >
+                        <a class="nav-link">
+                            <i class="fas fa-cog me-2"></i>Settings
+                        </a>
+
+                        <a class="nav-link">
+                            <i class="fas fa-sign-out-alt me-2"></i>Log Out
+                        </a>
                     </nav>
+
                     <div class="mt-auto text-center">
                         <img
                             src="assets/profile_cropped.png"
@@ -119,28 +158,37 @@
                         <small>Developer</small>
                     </div>
                 </div>
-
+                <!-- Sidebar-->
                 <!-- Main Dashboard -->
-                <div class="col p-4">
+                <div class="col p-4" style="margin-left: 260px">
                     <!-- Header -->
                     <div
                         class="d-flex justify-content-between align-items-center mb-4"
                     >
                         <h3 class="fw-bold">DJUBO Employee Services</h3>
-                        <div class="input-group w-50">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Search..."
+
+                        <div class="d-flex align-items-center gap-3">
+                            <i
+                                class="fas fa-rotate-right fs-5 text-secondary"
+                                style="cursor: pointer; margin-right: 20px"
+                            ></i>
+
+                            <i
+                                class="fas fa-cog fs-5 text-secondary"
+                                style="cursor: pointer; margin-right: 20px"
+                            ></i>
+
+                            <img
+                                src="assets/profile_cropped.png"
+                                alt="Profile"
+                                class="rounded-circle"
+                                style="
+                                    width: 40px;
+                                    height: 40px;
+                                    object-fit: cover;
+                                "
                             />
                         </div>
-
-                        <span
-                            class="input-group-text bg-light mode-toggle"
-                            style="cursor: pointer"
-                        >
-                            <i class="fas fa-moon" id="mode-icon"></i>
-                        </span>
                     </div>
 
                     <!-- Stats Cards -->
@@ -171,14 +219,21 @@
                         </div>
                     </div>
 
-                    <!-- Charts -->
-                    <div class="chart-box mb-4">
-                        <h5>Attendance Overview</h5>
-                        <canvas id="lineChart"></canvas>
+                    <div class="mt-5 mb-4">
+                        <h5>Work Heat Map</h5>
+                        <div class="calendar" id="work-hours-calendar"></div>
                     </div>
+
+                    <!-- Charts -->
+
                     <div class="chart-box">
                         <h5>Attendance by Week</h5>
                         <canvas id="barChart"></canvas>
+                    </div>
+
+                    <div class="chart-box mb-4">
+                        <h5>Attendance Overview</h5>
+                        <canvas id="lineChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -246,6 +301,53 @@
                     plugins: { legend: { display: false } },
                     scales: { y: { beginAtZero: true } },
                 },
+            });
+
+            const workHours = [
+                0, 2, 5, 6, 4, 8, 7, 9, 3, 1, 0, 5, 8, 6, 7, 2, 4, 6, 9, 10, 8,
+                5, 3, 1, 0, 7, 9, 6, 4, 2,
+            ];
+
+            const weekdays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+            const $calendar = $("#work-hours-calendar");
+
+            $.each(workHours, function (index, hours) {
+                const lightness = 100 - hours * 7;
+                const dayNum = index + 1;
+                const weekday = weekdays[index % 7];
+
+                const $box = $("<div></div>", {
+                    class: "day-box",
+                    css: {
+                        backgroundColor: `hsl(270, 60%, ${lightness}%)`,
+                        color: lightness > 75 ? "#333" : "#fff",
+                        position: "relative", // needed for absolute children
+                        padding: "12px",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                    },
+                });
+
+                const $dayNum = $("<div></div>", {
+                    text: dayNum,
+                    css: {
+                        fontSize: "24px",
+                        marginBottom: "8px",
+                    },
+                });
+
+                const $weekday = $("<div></div>", {
+                    text: weekday,
+                    css: {
+                        fontSize: "12px",
+                        position: "absolute",
+                        bottom: "4px",
+                        right: "6px",
+                    },
+                });
+
+                $box.append($dayNum).append($weekday);
+                $calendar.append($box);
             });
         </script>
     </body>

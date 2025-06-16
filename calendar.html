@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Work Hours Calendar</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <style>
+            .calendar {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 5px;
+            }
+
+            .day-box {
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                font-weight: bold;
+                border-radius: 8px;
+            }
+        </style>
+    </head>
+    <body class="p-4">
+        <h3 class="mb-4">June Work Hours Calendar</h3>
+        <div class="calendar" id="calendar"></div>
+
+        <script>
+            // Simulated work hours data (0 to 10 hours)
+            const workHours = [
+                0, 2, 5, 6, 4, 8, 7, 9, 3, 1, 0, 5, 8, 6, 7, 2, 4, 6, 9, 10, 8,
+                5, 3, 1, 0, 7, 9, 6, 4, 2,
+            ];
+
+            const calendar = document.getElementById("calendar");
+
+            workHours.forEach((hours, index) => {
+                const box = document.createElement("div");
+                const lightness = 100 - hours * 7; // maps 0–10 to 100–30
+                box.className = "day-box";
+                box.style.backgroundColor = `hsl(200, 70%, ${lightness}%)`;
+                box.innerText = `Day ${index + 1}`;
+                calendar.appendChild(box);
+            });
+        </script>
+    </body>
+</html>
