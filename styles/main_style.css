@@ -51,3 +51,29 @@ body {
     object-fit: cover;
     border-radius: 8px;
 }
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar .day-box {
+    height: 100px;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.btn.clicked {
+    background-color: #825995 !important;
+    color: white !important;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}

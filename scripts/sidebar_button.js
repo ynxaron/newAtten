@@ -43,15 +43,6 @@ $(() => {
   let checkoutTime;
   let breaksArray = [];
 
-  // Utility to format Date as "HH:MM"
-  function formatTime(date) {
-    return (
-      date.getHours().toString().padStart(2, "0") +
-      ":" +
-      date.getMinutes().toString().padStart(2, "0")
-    );
-  }
-
   $.getJSON("data/user_info.json", function (data) {
     if (data.username) {
       $("#username-display").text(data.username);
@@ -83,43 +74,37 @@ $(() => {
       });
     }, 1000);
   }
-  // Utility to calculate duration in "HH:MM"
-  function calculateDuration(start, end) {
-    const diffMs = end - start;
-    const totalMins = Math.floor(diffMs / 60000);
-    const hours = Math.floor(totalMins / 60)
-      .toString()
-      .padStart(2, "0");
-    const mins = (totalMins % 60).toString().padStart(2, "0");
-    return `${hours}:${mins}`;
-  }
 
   // Check In
   $("#checkin-btn").click(function () {
-    checkinTime = new Date();
+    checkinTime = moment();
     breaksArray = []; // Reset for new session
-    console.log("Checked in at:", formatTime(checkinTime));
+    console.log("Checked in at:", checkinTime.format("HH:MM"));
     showText("YOU ARE LOGGED IN!");
   });
 
   // Break
   $("#break-btn").click(function () {
-    const breakTime = new Date();
-    breaksArray.push(formatTime(breakTime));
-    console.log("Break at:", formatTime(breakTime));
-    showText("BREAK BEGINS @" + formatTime(breakTime));
+    const breakTime = moment().format("HH:MM");
+    breaksArray.push(breakTime);
+    console.log("Break at:", breakTime);
+    showText("BREAK BEGINS @" + breakTime);
   });
 
   // Check Out
   //
   $("#checkout-btn").click(function () {
-    checkoutTime = new Date();
+    if (!checkinTime) {
+      showText("Check In Before you Check Out!");
+      return;
+    }
 
+    checkoutTime = moment();
     const sessionData = {
-      checkin: formatTime(checkinTime),
+      checkin: checkinTime.format("HH:MM"),
       breaks: breaksArray,
-      checkout: formatTime(checkoutTime),
-      duration: calculateDuration(checkinTime, checkoutTime),
+      checkout: checkoutTime.format("HH:MM"),
+      duration: Math.round(checkoutTime.diff(checkinTime, "minutes") / 60),
     };
 
     localStorage.setItem("userSession", JSON.stringify(sessionData));

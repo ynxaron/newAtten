@@ -1,22 +1,43 @@
-$(() => {
-  function updateTime() {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, "0");
-    const minutes = now.getMinutes().toString().padStart(2, "0");
-    const timeString = `${hours}:${minutes}`;
-    $("#current-time").text(timeString);
-  }
+let attendanceApp = angular.module("attendanceApp", []);
+attendanceApp.controller(
+  "header",
+  function ($scope, $http, $interval, $timeout) {
+    $scope.userName = "DB ERROR";
+    $scope.userJob = "DB ERROR";
+    $scope.currentTime = "DB ERROR";
 
-  // Call once immediately
-  updateTime();
+    $http.get("data/user_info.json").then((response) => {
+      $scope.userName = response.data.username;
+      $scope.userJob = response.data.userjob;
+    });
 
-  // Optional: update every minute
-  setInterval(updateTime, 60000);
-  $.getJSON("data/user_info.json", function (data) {
-    if (data.username) {
-      $("#username").text("Hello, " + data.username);
-    }
-  }).fail(function () {
-    console.log("ERROR ASSIGNING USER VALUE");
-  });
-});
+    $interval(() => {
+      $scope.currentTime = moment().format("HH:MM");
+    }, 100);
+
+    $scope.settingsVisible = false;
+    $scope.refresh = () => {
+      window.location.reload();
+    };
+    $scope.openSettings = () => {};
+    $scope.toggleProfile = () => {
+      if ($scope.settingsVisible) {
+        $("#setting-overview").css("opacity", 0);
+        $scope.settingsVisible = false;
+      } else {
+        $("#setting-overview").css("opacity", 1);
+        $scope.settingsVisible = true;
+      }
+    };
+
+    // BEGIN: Adding Border Animations
+    $scope.thisClick = null;
+    $scope.thisSelect = (btn_name) => {
+      $scope.thisClick = btn_name;
+      $timeout(() => {
+        $scope.thisClick = null;
+      }, 200); // 1/5th a second, should be enough
+    };
+    // END: Adding Border Animations
+  },
+);
