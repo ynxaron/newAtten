@@ -5,10 +5,23 @@ attendanceApp.controller(
     $scope.userName = "DB ERROR";
     $scope.userJob = "DB ERROR";
     $scope.currentTime = "DB ERROR";
+    $scope.firstName = "DB ERROR";
+
+    $scope.greeting = () => {
+      let this_hour = Number(moment().format("HH"));
+      if (this_hour < 10) {
+        return "Good Morning, ";
+      } else if (this_hour < 16) {
+        return "Good Afternoon, ";
+      } else {
+        return "Good evening, ";
+      }
+    };
 
     $http.get("data/user_info.json").then((response) => {
       $scope.userName = response.data.username;
       $scope.userJob = response.data.userjob;
+      $scope.firstName = $scope.userName.split(" ")[0];
     });
 
     $interval(() => {
