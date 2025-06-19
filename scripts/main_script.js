@@ -89,6 +89,8 @@ $(() => {
   });
 
   // END: PROFILE OVERVIEW CHARTS
+  //
+  //
 
   // BEGIN: CALENDAR VIEW
   const allDays = moment.weekdaysShort();
@@ -105,6 +107,7 @@ $(() => {
     const dayNum = index + 1;
     const weekday = weekDays[index % 7];
 
+    // Creating The Div To Be Injected: BEGIN
     const $box = $("<div></div>", {
       class: "day-box",
       css: {
@@ -137,7 +140,14 @@ $(() => {
 
     $box.append($dayNum).append($weekday);
     $calendar.append($box);
+    // Creating a day-box to be rejected: END
   });
+
+  // Changing The Colors When Hovered: Begin
+  $("#box-container").on("mouseenter", () => {
+    $(this).css({ "background-color": "black", color: "white" });
+  });
+  // Changing The Colots When Hovered: End
 
   // END: CALENDAR VIEW
 
@@ -184,4 +194,5 @@ $(() => {
     },
   });
   // END: MONTH WORK VIEW
+  // BEGIN:
 });

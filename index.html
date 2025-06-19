@@ -22,6 +22,9 @@
 
         <!-- Chartjs -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!--High Charts-->
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+
         <script src="scripts/sidebar_button.js"></script>
         <script src="scripts/header_script.js"></script>
         <script src="scripts/main_script.js"></script>
@@ -303,7 +306,9 @@
                         class="row border shadow-lg p-4 m-1 mb-4 rounded"
                         style="height: 420px"
                     >
-                        <div class="col-6 d-flex rounded-circle mb-2">
+                        <div
+                            class="col-6 col-md-6 col-xs-6 d-flex rounded-circle mb-2"
+                        >
                             <img
                                 src="assets/profile_cropped.png"
                                 style="width: 360px; styleheight: 60px"
@@ -325,17 +330,189 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-2 mt-5">
+                        <div class="col-2 col-xs-12 mt-5">
                             <canvas id="Hours-Metric"></canvas>
                         </div>
-                        <div class="col-2 mt-5">
+                        <div class="col-2 col-xs-12 mt-5">
                             <canvas id="Feature-Ticked"></canvas>
                         </div>
-                        <div class="col-2 mt-5">
+                        <div class="col-2 col-xs-12 mt-5">
                             <canvas id="Code-Evaluation"></canvas>
                         </div>
                     </div>
                     <!--END: Profile Overview-->
+
+                    <!--BEGIN: Code & Collegue overview-->
+
+                    <div class="row shadow m-2 p-3 shadow-lg rounded">
+                        <h1 class="mb-1 mt-4 fw-bold">Your Team</h1>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <!-- Member Card Template -->
+                            <div class="col">
+                                <div class="d-flex align-items-center p-4">
+                                    <img
+                                        src="assets/first_profile_round.png"
+                                        class="rounded-circle me-4"
+                                        width="100"
+                                        height="100"
+                                        alt="Profile"
+                                    />
+                                    <div class="flex-grow-1">
+                                        <h4 class="fw-bold mb-1">Shreyansh</h4>
+                                        <div
+                                            class="text-muted mb-2 fw-semibold"
+                                        >
+                                            Backend Developer
+                                        </div>
+                                        <div class="fw-medium">
+                                            Fixed checkout time zone bug
+                                        </div>
+                                    </div>
+                                    <i
+                                        class="fas fa-circle text-secondary ms-3 fs-4"
+                                    ></i>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="d-flex align-items-center p-4">
+                                    <img
+                                        src="assets/second_profile_round.png"
+                                        class="rounded-circle me-4"
+                                        width="100"
+                                        height="100"
+                                        alt="Profile"
+                                    />
+                                    <div class="flex-grow-1">
+                                        <h4 class="fw-bold mb-1">Arpita</h4>
+                                        <div
+                                            class="text-muted mb-2 fw-semibold"
+                                        >
+                                            UI/UX Designer
+                                        </div>
+                                        <div class="fw-medium">
+                                            Updated booking form styling
+                                        </div>
+                                    </div>
+                                    <i
+                                        class="fas fa-circle text-secondary ms-3 fs-4"
+                                    ></i>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="d-flex align-items-center p-4">
+                                    <img
+                                        src="assets/third_profile_round.png"
+                                        class="rounded-circle me-4"
+                                        width="100"
+                                        height="100"
+                                        alt="Profile"
+                                    />
+                                    <div class="flex-grow-1">
+                                        <h4 class="fw-bold mb-1">
+                                            Aryan Gupta
+                                        </h4>
+                                        <div
+                                            class="text-muted mb-2 fw-semibold"
+                                        >
+                                            Full Stack Dev
+                                        </div>
+                                        <div class="fw-medium">
+                                            Added minibar report API
+                                        </div>
+                                    </div>
+                                    <i
+                                        class="fas fa-circle text-success ms-3 fs-4"
+                                    ></i>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="d-flex align-items-center p-4">
+                                    <img
+                                        src="assets/fourth_profile_round.png"
+                                        class="rounded-circle me-4"
+                                        width="100"
+                                        height="100"
+                                        alt="Profile"
+                                    />
+                                    <div class="flex-grow-1">
+                                        <h4 class="fw-bold mb-1">
+                                            Priyanshu Kumar
+                                        </h4>
+                                        <div
+                                            class="text-muted mb-2 fw-semibold"
+                                        >
+                                            DevOps Engineer
+                                        </div>
+                                        <div class="fw-medium">
+                                            Deployed booking app to staging
+                                        </div>
+                                    </div>
+                                    <i
+                                        class="fas fa-circle text-secondary ms-3 fs-4"
+                                    ></i>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="d-flex align-items-center p-4">
+                                    <img
+                                        src="assets/fifth_profile_round.png"
+                                        class="rounded-circle me-4"
+                                        width="100"
+                                        height="100"
+                                        alt="Profile"
+                                    />
+                                    <div class="flex-grow-1">
+                                        <h4 class="fw-bold mb-1">Sudharsanu</h4>
+                                        <div
+                                            class="text-muted mb-2 fw-semibold"
+                                        >
+                                            QA Engineer
+                                        </div>
+                                        <div class="fw-medium">
+                                            Added tests for guest login
+                                        </div>
+                                    </div>
+                                    <i
+                                        class="fas fa-circle text-success ms-3 fs-4"
+                                    ></i>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="d-flex align-items-center p-4">
+                                    <img
+                                        src="assets/sixth_profile_round.png"
+                                        class="rounded-circle me-4"
+                                        width="100"
+                                        height="100"
+                                        alt="Profile"
+                                    />
+                                    <div class="flex-grow-1">
+                                        <h4 class="fw-bold mb-1">
+                                            Aryan Gupta
+                                        </h4>
+                                        <div
+                                            class="text-muted mb-2 fw-semibold"
+                                        >
+                                            Frontend Developer
+                                        </div>
+                                        <div class="fw-medium">
+                                            Refactored calendar component
+                                        </div>
+                                    </div>
+                                    <i
+                                        class="fas fa-circle text-success ms-3 fs-4"
+                                    ></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--END: Code & Collegue overview-->
 
                     <div class="mt-5 mb-4 chart-box shadow">
                         <h4><strong>Heat Map</strong></h4>
@@ -348,7 +525,6 @@
                         <h4><strong>Hours by Week</strong></h4>
                         <canvas id="barChart"></canvas>
                     </div>
-
                     <div class="chart-box mb-4 shadow">
                         <h4><strong>Hours By Month</strong></h4>
                         <canvas id="lineChart"></canvas>
