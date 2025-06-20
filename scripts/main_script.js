@@ -1,4 +1,75 @@
 $(() => {
+  // BEGIN: PEERS WATCH LIST (through jquery)
+  const teamInfo = [
+    {
+      photo: "assets/first_profile_round.png",
+      name: "Shreyansh",
+      title: "Backend Developer",
+      update: "Fixed checkout time zone bug",
+      online: true,
+    },
+    {
+      photo: "assets/second_profile_round.png",
+      name: "Arpita",
+      title: "UI/UX Designer",
+      update: "Updated booking form styling",
+      online: false,
+    },
+    {
+      photo: "assets/third_profile_round.png",
+      name: "Aryan Gupta",
+      title: "Full Stack Dev",
+      update: "Added minibar report API",
+      online: true,
+    },
+    {
+      photo: "assets/fourth_profile_round.png",
+      name: "Priyanshu Kumar",
+      title: "DevOps Engineer",
+      update: "Deployed booking app to staging",
+      online: false,
+    },
+    {
+      photo: "assets/fifth_profile_round.png",
+      name: "Sudharsanu",
+      title: "QA Engineer",
+      update: "Added tests for guest login",
+      online: true,
+    },
+    {
+      photo: "assets/sixth_profile_round.png",
+      name: "Aryan Gupta",
+      title: "Frontend Developer",
+      update: "Refactored calendar component",
+      online: false,
+    },
+  ];
+
+  teamInfo.forEach((member) => {
+    const statusOnline = member.online ? "text-success" : "text-secondary";
+    const card = `<div class="col">
+                      <div class="d-flex align-items-center p-4">
+                        <img src="${member.photo}"
+                            class="rounded-circle me-4"
+                            width="100"
+                            height="100"
+                            alt="Profile"
+                        />
+                        <div class="flex-grow-1">
+                          <h4 class="fw-bold mb-1">${member.name}</h4>
+                          <div class="text-muted mb-2 fw-semibold">${member.title}</div>
+                          <div class="fw-medium">
+                            ${member.update}
+                          </div>
+                        </div>
+                        <i class="fas fa-circle ${statusOnline} ms-3 fs-4"></i>
+                      </div>
+                    </div>`;
+
+    $("#teamOverview").append(card);
+  });
+
+  // END: PEERS WATCH LIST (through jquery)
   // BEGIN: PROFILE OVERVIEW CHARTS
   let hours_metric = $("#Hours-Metric");
   let features_ticked = $("#Feature-Ticked");
