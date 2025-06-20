@@ -18,7 +18,7 @@ attendanceApp.controller(
           return "Good evening, ";
         }
       };
-    }, 1000);
+    }, 100);
 
     $http.get("data/user_info.json").then((response) => {
       $scope.userName = response.data.username;

@@ -1,72 +1,66 @@
 $(() => {
   // BEGIN: PEERS WATCH LIST (through jquery)
-  const teamInfo = [
-    {
-      photo: "assets/first_profile_round.png",
-      name: "Shreyansh",
-      title: "Backend Developer",
-      update: "Fixed checkout time zone bug",
-      online: true,
-    },
-    {
-      photo: "assets/second_profile_round.png",
-      name: "Arpita",
-      title: "UI/UX Designer",
-      update: "Updated booking form styling",
-      online: false,
-    },
-    {
-      photo: "assets/third_profile_round.png",
-      name: "Aryan Gupta",
-      title: "Full Stack Dev",
-      update: "Added minibar report API",
-      online: true,
-    },
-    {
-      photo: "assets/fourth_profile_round.png",
-      name: "Priyanshu Kumar",
-      title: "DevOps Engineer",
-      update: "Deployed booking app to staging",
-      online: false,
-    },
-    {
-      photo: "assets/fifth_profile_round.png",
-      name: "Sudharsanu",
-      title: "QA Engineer",
-      update: "Added tests for guest login",
-      online: true,
-    },
-    {
-      photo: "assets/sixth_profile_round.png",
-      name: "Aryan Gupta",
-      title: "Frontend Developer",
-      update: "Refactored calendar component",
-      online: false,
-    },
-  ];
+  // defining the team data here, later can make this array into a parsed db request
+  $.getJSON("data/onlines.json", (data) => {
+    let teamInfo = data;
 
-  teamInfo.forEach((member) => {
-    const statusOnline = member.online ? "text-success" : "text-secondary";
-    const card = `<div class="col">
-                      <div class="d-flex align-items-center p-4">
-                        <img src="${member.photo}"
-                            class="rounded-circle me-4"
-                            width="100"
-                            height="100"
-                            alt="Profile"
-                        />
-                        <div class="flex-grow-1">
-                          <h4 class="fw-bold mb-1">${member.name}</h4>
-                          <div class="text-muted mb-2 fw-semibold">${member.title}</div>
-                          <div class="fw-medium">
-                            ${member.update}
-                          </div>
-                        </div>
-                        <i class="fas fa-circle ${statusOnline} ms-3 fs-4"></i>
-                      </div>
-                    </div>`;
+    _.each(teamInfo, (member, index) => {
+      const statusOnline = member.online ? "text-success" : "text-secondary";
 
-    $("#teamOverview").append(card);
+      let person_overview = `<div class="d-flex flex-column position-absolute border border-white shadow-lg z-3" id="person-${index}-overview" style="opacity:0">
+            <p class="text-white bg-dark">Hello</p>
+         </div>
+        `;
+
+      let card = `<div class="col position-relative z-2">
+                              <div class="d-flex align-items-center p-4">
+                                <button class="btn btn-white border-white" id="online-profile-${index}-btn">
+                                  ${person_overview}
+                                  <img src="${member.photo}"
+                                      class="rounded-circle me-4"
+                                      width="100"
+                                      height="100"
+                                      alt="Profile"
+                                />
+                                </button>
+                                <div class="flex-grow-1">
+                                  <h4 class="fw-bold mb-1">${member.name}</h4>
+                                  <div class="text-muted mb-2 fw-semibold">${member.title}</div>
+                                  <div class="fw-medium">
+                                    ${member.update}
+                                  </div>
+                                </div>
+                                <i class="fas fa-circle ${statusOnline} ms-3 fs-4"></i>
+                              </div>
+                          </div>`;
+
+      $("#teamOverview").append(card);
+    });
+  });
+
+  // Adding interactivity to the online profile button
+
+  // The way this function works is first it defines a variable
+  let toggleFriendsOverview = false; // <---- this variable
+  // which would check if our profile view is toggled or not.
+
+  // In the function then we check first whether the event if 'click', and is on
+  // entities (I don't know what to call them, never learned it)
+  $("#teamOverview").on("click", "button", function () {
+    const button_id = $(this).attr("id"); // then we get the id value of the element choosen
+    const id_num = Number(button_id.split("-")[2]); // then we get the id using split
+    // we log for debugging purposes
+    console.log("You Clicked On " + id_num + "th button");
+    // we then use this toggleFriendsOverview variable, checking if it is true
+    // (friends overview is visible), make the div with this id
+    // (gotten by adding the id_num into another pattern), and changing css
+    if (toggleFriendsOverview) {
+      $(`#person-${id_num}-overview`).css("opacity", 0);
+    } else {
+      $(`#person-${id_num}-overview`).css("opacity", 1);
+    }
+    // then we XOR toggleFriendsOverview with itself, flipping the value
+    toggleFriendsOverview ^= 1;
   });
 
   // END: PEERS WATCH LIST (through jquery)
