@@ -272,7 +272,6 @@
                     </div>
                     <!--END: ICONS & BUTTONS-->
 
-                    <!-- Stats Cards -->
                     <!--BEGIN: Different Graphs-->
                     <div class="row g-3 mb-4">
                         <div class="col-md-3">
@@ -350,10 +349,11 @@
                     >
                         <h1 class="mt-5 ms-3 fw-bold">Your Team</h1>
                         <div
-                            class="row row-cols-1 row-cols-md-2 g-4"
+                            class="row row-cols-1 row-cols-md-2 g-4 position-relative"
                             id="teamOverview"
                         >
-                            <!-- Teams Info, injected throguh jquery -->
+                            <!-- Teams Info, injected throguh JQery--->
+                            <!-- Teams Info, injected throguh JQuery--->
                         </div>
                     </div>
 
@@ -364,12 +364,13 @@
                         <div class="calendar" id="work-hours-calendar"></div>
                     </div>
 
-                    <!-- Charts -->
-
+                    <!--Hours By Week Map-->
                     <div class="chart-box shadow">
                         <h4><strong>Hours by Week</strong></h4>
                         <canvas id="barChart"></canvas>
                     </div>
+
+                    <!--Hours My Month Map-->
                     <div class="chart-box mb-4 shadow">
                         <h4><strong>Hours By Month</strong></h4>
                         <canvas id="lineChart"></canvas>

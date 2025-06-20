@@ -7,16 +7,18 @@ attendanceApp.controller(
     $scope.currentTime = "DB ERROR";
     $scope.firstName = "DB ERROR";
 
-    $scope.greeting = () => {
-      let this_hour = Number(moment().format("HH"));
-      if (this_hour < 10) {
-        return "Good Morning, ";
-      } else if (this_hour < 16) {
-        return "Good Afternoon, ";
-      } else {
-        return "Good evening, ";
-      }
-    };
+    $interval(() => {
+      $scope.greeting = () => {
+        let this_hour = Number(moment().format("HH"));
+        if (this_hour < 10) {
+          return "Good Morning, ";
+        } else if (this_hour < 16) {
+          return "Good Afternoon, ";
+        } else {
+          return "Good evening, ";
+        }
+      };
+    }, 1000);
 
     $http.get("data/user_info.json").then((response) => {
       $scope.userName = response.data.username;
