@@ -5,9 +5,9 @@ jquery, moments and underscorejs in frontend and Django in backend as well as ot
 
 ## Pages Of The (unfinished) Website
 
-1. ![]("assets/project_overview_1.png")
-2. ![]("assets/project_overview_2.png")
-3. ![]("assets/project_overview_3.png")
-4. ![]("assets/project_overview_4.png")
-5. ![]("assets/project_overview_5.png")
-6. ![]("assets/project_overview_6.png")
+1. ![First]("assets/project_overview_1.png")
+2. ![Second]("assets/project_overview_2.png")
+3. ![Third]("assets/project_overview_3.png")
+4. ![Fourth]("assets/project_overview_4.png")
+5. ![Fifth]("assets/project_overview_5.png")
+6. ![Sixth]("assets/project_overview_6.png")
