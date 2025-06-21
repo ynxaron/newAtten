@@ -7,10 +7,17 @@ $(() => {
     _.each(teamInfo, (member, index) => {
       const statusOnline = member.online ? "text-success" : "text-secondary";
 
-      let person_overview = `<div class="d-flex flex-column position-absolute border border-white shadow-lg z-3" id="person-${index}-overview" style="opacity:0">
-            <p class="text-white bg-dark">Hello</p>
-         </div>
-        `;
+      let person_overview = `<div
+        class="d-flex position-absolute justify-content-around border bg-white border-white shadow-lg p-3 rounded w-50"
+        id="person-${index}-overview"
+        style="opacity:0; z-index:9999">
+
+          <!--the 'a's are here so that in future I can add button id's and add interactivity-->
+          <div><a><i class="fas fa-envelope"></i></a></div>
+          <div><a><i class="fas fa-bell"></i></a></div>
+          <div><a><i class="fas fa-phone"></i></a></div>
+
+        </div>`;
 
       let card = `<div class="col position-relative z-2">
                               <div class="d-flex align-items-center p-4">
@@ -59,7 +66,7 @@ $(() => {
     } else {
       $(`#person-${id_num}-overview`).css("opacity", 1);
     }
-    // then we XOR toggleFriendsOverview with itself, flipping the value
+    // then we XOR toggleFriendsOverview with itself and 1, flipping the value
     toggleFriendsOverview ^= 1;
   });
 
