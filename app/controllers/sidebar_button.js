@@ -75,16 +75,26 @@ $(() => {
     }, 1000);
   }
 
-  // Check In
+  // BEGIN: Check-In, Breaks, & CheckOut Logic
+  let checkedIn = false;
+  let checkedOut = false;
   $("#checkin-btn").click(function () {
     checkinTime = moment();
-    breaksArray = []; // Reset for new session
+    breaksArray = []; // Resets for a new session
+    checkedIn = true;
     console.log("Checked in at:", checkinTime.format("HH:MM"));
     showText("YOU ARE LOGGED IN!");
   });
 
   // Break
   $("#break-btn").click(function () {
+    if (!checkedIn) {
+      showText("Check In Before You Take Breaks!");
+      return;
+    } else if (checkedOut) {
+      showText("You Have Already Checked Out");
+      return;
+    }
     const breakTime = moment().format("HH:MM");
     breaksArray.push(breakTime);
     console.log("Break at:", breakTime);
@@ -109,6 +119,7 @@ $(() => {
 
     localStorage.setItem("userSession", JSON.stringify(sessionData));
     console.log("Session saved:", sessionData);
+    checkedOut = true;
     showText("YOU CHECKOUT OUT! ENJOY YOUR DAY OFF!!");
   });
   // END: Making it so that checkin and checkout time is stored
