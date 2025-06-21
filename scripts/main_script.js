@@ -4,25 +4,54 @@ $(() => {
   $.getJSON("data/onlines.json", (data) => {
     let teamInfo = data;
 
+    // This function would iterate over all the items in data/onlines.json and for each
+    // member found, create two divs. One would contain the profile overviews, and the other
+    // would contain another overview that would happen only when you click on the profile.
     _.each(teamInfo, (member, index) => {
       const statusOnline = member.online ? "text-success" : "text-secondary";
 
-      let person_overview = `<div
-        class="d-flex position-absolute justify-content-around border bg-white border-white shadow-lg p-3 rounded w-50"
-        id="person-${index}-overview"
-        style="opacity:0; z-index:9999">
+      let person_overview = `
+        <div
+          class="d-flex flex-column position-absolute border bg-white border-white shadow-lg p-3 w-50 shadow-lg"
+          id="person-${index}-overview"
+          style="opacity:0; z-index:9999; transition: opacity 0.3s; border-radius: 12px"
+        >
+          <!-- Top section: Status icon, profile image, and name -->
+          <div class="d-flex justify-content-between align-items-center mb-3">
 
-          <!--the 'a's are here so that in future I can add button id's and add interactivity-->
-          <div><a><i class="fas fa-envelope"></i></a></div>
-          <div><a><i class="fas fa-bell"></i></a></div>
-          <div><a><i class="fas fa-phone"></i></a></div>
+            <!-- Profile image -->
+            <div class="mb-3">
+            <img
+              src="${member.photo}"
+              alt="Profile Photo"
+              class="rounded-circle me-3"
+              style="width: 90px; height: 90px; object-fit: cover"
+            />
 
+            <!-- Name -->
+            <strong class="h3 fw-bold">${member.name}</strong>
+            </div>
+
+            <!-- Status icon -->
+            <i
+              id="person-${index}-status"
+              class="fas fa-circle me-3 ${member.online ? "text-success" : "text-secondary"}"
+              style="font-size: 0.75rem;"
+            ></i>
+          </div>
+
+          <!-- Icon section -->
+          <div class="d-flex justify-content-around mb-1">
+            <div><a><i class="fas fa-envelope"></i></a></div>
+            <div><a><i class="fas fa-bell"></i></a></div>
+            <div><a><i class="fas fa-phone"></i></a></div>
+          </div>
         </div>`;
 
       let card = `<div class="col position-relative z-2">
                               <div class="d-flex align-items-center p-4">
                                 <button class="btn btn-white border-white" id="online-profile-${index}-btn">
-                                  ${person_overview}
+                                ${person_overview}
                                   <img src="${member.photo}"
                                       class="rounded-circle me-4"
                                       width="100"
@@ -63,8 +92,10 @@ $(() => {
     // (gotten by adding the id_num into another pattern), and changing css
     if (toggleFriendsOverview) {
       $(`#person-${id_num}-overview`).css("opacity", 0);
+      // $(`#person-${id_num}-overview).fadeIn();
     } else {
       $(`#person-${id_num}-overview`).css("opacity", 1);
+      // $(`#person-${id_num}-overview).fadeOut();
     }
     // then we XOR toggleFriendsOverview with itself and 1, flipping the value
     toggleFriendsOverview ^= 1;
@@ -230,7 +261,7 @@ $(() => {
       labels: weekDays,
       datasets: [
         {
-          label: "Students",
+          label: "HOURS",
           data: [5, 7, 4, 7, 5],
           backgroundColor: "rgba(124, 86, 247, 0.7)",
         },
@@ -251,7 +282,7 @@ $(() => {
       labels: moment.monthsShort(),
       datasets: [
         {
-          label: "Attendance",
+          label: "HOURS",
           data: [51, 40, 40, 52, 45, 39, 54, 40, 39, 50, 30, 25],
           backgroundColor: "rgba(124, 86, 247, 0.2)",
           borderColor: "rgba(124, 86, 247, 1)",
