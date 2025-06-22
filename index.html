@@ -307,42 +307,51 @@
                     <!--END: days coming and going-->
 
                     <!--BEGIN: Profile Overview-->
-                    <div
-                        class="row border shadow-lg p-4 m-1 mb-4 rounded"
-                        style="height: 420px"
-                    >
+
+                    <div class="row border shadow-lg p-4 m-1 mb-4 rounded">
+                        <!-- Profile Section -->
                         <div
-                            class="col-6 col-md-6 col-xs-6 d-flex rounded-circle mb-2"
+                            class="col-12 col-md-6 d-flex flex-column flex-md-row align-items-center mb-4"
                         >
                             <img
                                 src="assets/profile_cropped.png"
-                                style="width: 360px; styleheight: 60px"
+                                class="img-fluid rounded-circle"
+                                style="max-width: 200px; height: auto"
                             />
-                            <div class="ms-5 mt-2" style="margin-top: 40px">
-                                <p class="display-5 fw-bold mb-4">
+                            <div
+                                class="ms-md-4 mt-4 mt-md-0 text-center text-md-start"
+                            >
+                                <p class="display-6 fw-bold mb-2">
                                     Satyam Prakash
                                 </p>
-                                <p
-                                    class="h2 fw-bold text-muted"
-                                    style="margin-top: 40px"
-                                >
+                                <p class="h4 fw-bold text-muted mb-2">
                                     Backend Developer
                                 </p>
-                                <p class="h3 mb-3">Django, Rust, WASM</p>
-                                <p class="h6" style="margin-top: 40px">
-                                    Joined
-                                    <strong>2nd Of August, 2025</strong>
+                                <p class="h5 mb-2">Django, Rust, WASM</p>
+                                <p class="h6 mt-3">
+                                    Joined <strong>2nd Of August, 2025</strong>
                                 </p>
                             </div>
                         </div>
-                        <div class="col-2 col-xs-12 mt-5">
-                            <canvas id="Hours-Metric"></canvas>
+
+                        <!-- Chart Canvases -->
+                        <div class="col-12 col-md-2 mb-4 mb-md-0 text-center">
+                            <canvas
+                                id="Hours-Metric"
+                                style="width: 100%"
+                            ></canvas>
                         </div>
-                        <div class="col-2 col-xs-12 mt-5">
-                            <canvas id="Feature-Ticked"></canvas>
+                        <div class="col-12 col-md-2 mb-4 mb-md-0 text-center">
+                            <canvas
+                                id="Feature-Ticked"
+                                style="width: 100%"
+                            ></canvas>
                         </div>
-                        <div class="col-2 col-xs-12 mt-5">
-                            <canvas id="Code-Evaluation"></canvas>
+                        <div class="col-12 col-md-2 text-center">
+                            <canvas
+                                id="Code-Evaluation"
+                                style="width: 100%"
+                            ></canvas>
                         </div>
                     </div>
                     <!--END: Profile Overview-->
@@ -351,7 +360,7 @@
 
                     <div
                         class="row shadow m-2 p-3 shadow-lg rounded"
-                        style="height: 700px"
+                        max-style="height: 700px"
                     >
                         <h1 class="mt-5 ms-3 fw-bold">Your Team</h1>
                         <div

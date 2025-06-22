@@ -41,7 +41,6 @@ $(() => {
 
   let checkinTime;
   let checkoutTime;
-  let breaksArray = [];
 
   $.getJSON("data/user_info.json", function (data) {
     if (data.username) {
@@ -52,7 +51,7 @@ $(() => {
   });
 
   // User Utility Function
-
+  // This Utility Function Shows Any Text.
   function showText(message) {
     const textElement = $(`
         <div class="text-white p-3 rounded shadow text-center mb-2"
@@ -68,6 +67,10 @@ $(() => {
       `);
     $("body").append(textElement);
 
+    // We are using the JQuery fadeOut() function, but first
+    // initializing it after 1000ms, then fading it in 400ms.
+    // This creates a smoother animation than had we used
+    // either one alone
     setTimeout(() => {
       textElement.fadeOut(400, function () {
         $(this).remove();
@@ -76,13 +79,23 @@ $(() => {
   }
 
   // BEGIN: Check-In, Breaks, & CheckOut Logic
+  // These Variables Would define the complex logic of checkin in and checkin out
   let checkedIn = false;
-  let checkedOut = false;
+  let checkedOut = true;
+  // End of Variables Declration
+  let breaksArray = [];
   $("#checkin-btn").click(function () {
+    if (checkedIn) {
+      showText("You Have Already Checked In!");
+      return;
+    }
+    if (!checkedOut) {
+      showText("You Have Not Checked Out Yet!");
+      return;
+    }
     checkinTime = moment();
-    breaksArray = []; // Resets for a new session
     checkedIn = true;
-    console.log("Checked in at:", checkinTime.format("HH:MM"));
+    console.log("Checked in at:", checkinTime.format("HH:mm"));
     showText("YOU ARE LOGGED IN!");
   });
 
@@ -91,11 +104,13 @@ $(() => {
     if (!checkedIn) {
       showText("Check In Before You Take Breaks!");
       return;
-    } else if (checkedOut) {
+    }
+
+    if (checkedOut) {
       showText("You Have Already Checked Out");
       return;
     }
-    const breakTime = moment().format("HH:MM");
+    const breakTime = moment().format("HH:mm");
     breaksArray.push(breakTime);
     console.log("Break at:", breakTime);
     showText("BREAK BEGINS @" + breakTime);
@@ -104,23 +119,37 @@ $(() => {
   // Check Out
   //
   $("#checkout-btn").click(function () {
-    if (!checkinTime) {
+    if (!checkedIn) {
       showText("Check In Before you Check Out!");
       return;
     }
 
+    if (checkedOut) {
+      showText("You Have Already Checked Out!");
+      return;
+    }
+
     checkoutTime = moment();
+
+    // This function is here to calculate the difference in time as hours
+    function calculateWorkingTime(begin, end) {
+      const totalMins = end.diff(begin, "minutes");
+      const totalHours = totalMins / 60; // so that 330 mins would become 5 hr
+      const remainingMins = totalMins % 60; // so that 330 mins % 60 would become 30
+      return totalHours + remainingMins / 60; // the remainingMins / 60 would give us percent
+    }
+
     const sessionData = {
-      checkin: checkinTime.format("HH:MM"),
+      checkin: checkinTime.format("HH:mm"),
       breaks: breaksArray,
-      checkout: checkoutTime.format("HH:MM"),
-      duration: Math.round(checkoutTime.diff(checkinTime, "minutes") / 60),
+      checkout: checkoutTime.format("HH:mm"),
+      duration: calculateWorkingTime(checkinTime, checkoutTime),
     };
 
     localStorage.setItem("userSession", JSON.stringify(sessionData));
     console.log("Session saved:", sessionData);
     checkedOut = true;
-    showText("YOU CHECKOUT OUT! ENJOY YOUR DAY OFF!!");
+    showText("YOU CHECKOUT OUT! ENJOY REST OF YOUR DAY");
   });
   // END: Making it so that checkin and checkout time is stored
 });

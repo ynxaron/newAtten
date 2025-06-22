@@ -9,6 +9,7 @@ $(() => {
     // would contain another overview that would happen only when you click on the profile.
     _.each(teamInfo, (member, index) => {
       const statusOnline = member.online ? "text-success" : "text-secondary";
+      let profile_button_visible = "";
 
       let person_overview = `
         <div
@@ -20,31 +21,35 @@ $(() => {
           <div class="d-flex justify-content-between align-items-center mb-3">
 
             <!-- Profile image -->
-            <div class="mb-3">
-            <img
-              src="${member.photo}"
-              alt="Profile Photo"
-              class="rounded-circle me-3"
-              style="width: 90px; height: 90px; object-fit: cover"
-            />
+            <div class="mb-4">
+              <img
+                src="${member.photo}"
+                alt="Profile Photo"
+                class="rounded-circle me-2"
+                style="width: 70px; height: 70px; object-fit: cover"
+                />
 
             <!-- Name -->
-            <strong class="h3 fw-bold">${member.name}</strong>
+              <strong class="h4 fw-bold">${member.name.split(" ")[0]}</strong>
+              <small class="ms-2 mb-3 text-muted">${member.title}</small>
             </div>
 
             <!-- Status icon -->
-            <i
-              id="person-${index}-status"
-              class="fas fa-circle me-3 ${member.online ? "text-success" : "text-secondary"}"
-              style="font-size: 0.75rem;"
-            ></i>
+            <div class="mb-4">
+              <a id="person-${index}-status">
+                <i
+                  class="fas fa-circle me-3 ${member.online ? "text-success" : "text-secondary"}"
+                  style="font-size: 0.75rem;"
+                ></i>
+              </a>
+            </div>
           </div>
 
           <!-- Icon section -->
-          <div class="d-flex justify-content-around mb-1">
-            <div><a><i class="fas fa-envelope"></i></a></div>
-            <div><a><i class="fas fa-bell"></i></a></div>
-            <div><a><i class="fas fa-phone"></i></a></div>
+          <div class="d-flex justify-content-around mb-1" id="button-overview-${index}">
+            <div><a id="button-${index}-envelope"><i class="fas fa-envelope"></i></a></div>
+            <div><a id="button-${index}-bell"><i class="fas fa-bell"></i></a></div>
+            <div><a id="button-${index}-phone"><i class="fas fa-phone"></i></a></div>
           </div>
         </div>`;
 
@@ -99,6 +104,16 @@ $(() => {
     }
     // then we XOR toggleFriendsOverview with itself and 1, flipping the value
     toggleFriendsOverview ^= 1;
+  });
+
+  // Adding the interactivity for buttons (making them change colors for a bit)
+  // this would be changing the buttons inside the person_overview blue, before Changing
+  // to default black. This would only select
+  $("#button-overview").on("click", "button", function () {
+    $(this).addClass("bg-light");
+    setTimeout(() => {
+      $(this).removeClass("bg-light");
+    }, 500);
   });
 
   // END: PEERS WATCH LIST (through jquery)
@@ -211,7 +226,7 @@ $(() => {
     const weekday = weekDays[index % 7];
 
     // Creating The Div To Be Injected: BEGIN
-    const $box = $("<div></div>", {
+    const $boxJQ = $("<div></div>", {
       class: "day-box",
       css: {
         backgroundColor: `hsl(270, 60%, ${lightness}%)`,
@@ -223,7 +238,7 @@ $(() => {
       },
     });
 
-    const $dayNum = $("<div></div>", {
+    const $dayNumJQ = $("<div></div>", {
       text: dayNum,
       css: {
         fontSize: "24px",
@@ -231,7 +246,7 @@ $(() => {
       },
     });
 
-    const $weekday = $("<div></div>", {
+    const $weekdayJQ = $("<div></div>", {
       text: weekday,
       css: {
         fontSize: "12px",
@@ -241,8 +256,8 @@ $(() => {
       },
     });
 
-    $box.append($dayNum).append($weekday);
-    $calendar.append($box);
+    $boxJQ.append($dayNumJQ).append($weekdayJQ);
+    $calendar.append($boxJQ);
     // Creating a day-box to be rejected: END
   });
 

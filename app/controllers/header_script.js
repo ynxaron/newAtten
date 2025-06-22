@@ -27,7 +27,7 @@ attendanceApp.controller(
     });
 
     $interval(() => {
-      $scope.currentTime = moment().format("HH:MM");
+      $scope.currentTime = moment().format("HH:mm");
     }, 100);
 
     $scope.settingsVisible = false;
