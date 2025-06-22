@@ -1,7 +1,7 @@
 $(() => {
   // BEGIN: PEERS WATCH LIST (through jquery)
   // defining the team data here, later can make this array into a parsed db request
-  $.getJSON("data/onlines.json", (data) => {
+  $.getJSON("data/user_info.json", (data) => {
     let teamInfo = data;
 
     // This function would iterate over all the items in data/onlines.json and for each
