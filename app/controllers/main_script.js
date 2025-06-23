@@ -1,7 +1,7 @@
-$(() => {
+function setupDashboardUI() {
   // BEGIN: PEERS WATCH LIST (through jquery)
   // defining the team data here, later can make this array into a parsed db request
-  $.getJSON("data/user_info.json", (data) => {
+  $.getJSON("app/data/onlines.json", (data) => {
     let teamInfo = data;
 
     // This function would iterate over all the items in data/onlines.json and for each
@@ -9,7 +9,6 @@ $(() => {
     // would contain another overview that would happen only when you click on the profile.
     _.each(teamInfo, (member, index) => {
       const statusOnline = member.online ? "text-success" : "text-secondary";
-      let profile_button_visible = "";
 
       let person_overview = `
         <div
@@ -313,4 +312,4 @@ $(() => {
   });
   // END: MONTH WORK VIEW
   // BEGIN:
-});
+}

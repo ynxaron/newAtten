@@ -46,20 +46,20 @@
 
                 <hr style="height: 10px" />
 
-                <a class="nav-link" id="refresh-btn" href="#" target="_blank">
+                <a
+                    class="nav-link"
+                    id="refresh-btn"
+                    href="#!/dashboard"
+                    target="_blank"
+                >
                     <i class="fas fa-rotate-right me-2"></i>Refresh
                 </a>
 
-                <a
-                    class="nav-link"
-                    href="localhost:4500/settings.html"
-                    ,
-                    target="_blank"
-                >
+                <a class="nav-link" href="#!/setting" , target="_blank">
                     <i class="fas fa-cog me-2"></i>Settings
                 </a>
 
-                <a class="nav-link" href="localhost:4500/login.html">
+                <a class="nav-link" href="#!/">
                     <i class="fas fa-sign-out-alt me-2"></i>Log Out
                 </a>
             </nav>
@@ -185,8 +185,9 @@
 
                     <button
                         class="btn border border-white"
-                        ng-click="openSettings(); thisSelect('setting-btn')"
+                        ng-click="thisSelect('setting-btn'); openSettings()"
                         ng-class="{'clicked': thisClick == 'setting-btn'}"
+                        href="#!/setting"
                     >
                         <i
                             class="fas fa-cog fs-5 text-secondary"

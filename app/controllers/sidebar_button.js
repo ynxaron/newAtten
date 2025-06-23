@@ -1,4 +1,4 @@
-$(() => {
+function sidebarUI() {
   // BEGIN: Adjusting Sidebar
   const $sidebar = $("#sidebar");
   const $mainContent = $(".col.p-4");
@@ -36,13 +36,12 @@ $(() => {
   $sidebar.on("mouseleave", () => {
     $sidebar.css("transform", "translateX(-100%)");
     $mainContent.css("margin-left", "0");
-    sidebarVisible = false;
   });
 
   let checkinTime;
   let checkoutTime;
 
-  $.getJSON("data/user_info.json", function (data) {
+  $.getJSON("app/data/user_info.json", function (data) {
     if (data.username) {
       $("#username-display").text(data.username);
     } else {
@@ -94,7 +93,10 @@ $(() => {
       return;
     }
     checkinTime = moment();
+
     checkedIn = true;
+    checkedOut = false;
+
     console.log("Checked in at:", checkinTime.format("HH:mm"));
     showText("YOU ARE LOGGED IN!");
   });
@@ -129,6 +131,8 @@ $(() => {
       return;
     }
 
+    checkedIn = false;
+    checkedOut = true;
     checkoutTime = moment();
 
     // This function is here to calculate the difference in time as hours
@@ -152,4 +156,4 @@ $(() => {
     showText("YOU CHECKOUT OUT! ENJOY REST OF YOUR DAY");
   });
   // END: Making it so that checkin and checkout time is stored
-});
+}
