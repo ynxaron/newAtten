@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="col-md-4">
+        <label for="nameSelect" class="form-label fw-bold border"
+            >Employee</label
+        >
+        <select
+            class="form-select"
+            ng-model="nameChoosen"
+            ng-options="name for name in employeeNames"
+        ></select>
+    </div>
+
+    <div class="row border shadow-lg p-4 m-1 mb-4 rounded">
+        <!-- Profile Section -->
+        <div
+            class="col-12 col-md-6 d-flex flex-column flex-md-row align-items-center mb-4"
+        >
+            <img
+                ng-src="{{getAttr(nameChoosen, 'image')}}"
+                class="img-fluid rounded-circle"
+                style="max-width: 200px; height: auto"
+            />
+            <div class="ms-md-4 mt-4 mt-md-0 text-center text-md-start">
+                <p class="display-6 fw-bold mb-2">{{nameChoosen}}</p>
+                <p class="h4 fw-bold text-muted mb-2">
+                    {{getAttr(nameChoosen, 'role')}}
+                </p>
+                <p class="h5 mb-2">{{getAttr(nameChoosen, 'skills')}}</p>
+                <p class="h6 mt-3">
+                    Joined <strong>{{getAttr(nameChoosen, 'joined')}}</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Chart Canvases -->
+        <div class="col-12 col-md-2 mb-4 mb-md-0 text-center">
+            <canvas id="Hours-Metric" style="width: 100%"></canvas>
+        </div>
+        <div class="col-12 col-md-2 mb-4 mb-md-0 text-center">
+            <canvas id="Feature-Ticked" style="width: 100%"></canvas>
+        </div>
+        <div class="col-12 col-md-2 text-center">
+            <canvas id="Code-Evaluation" style="width: 100%"></canvas>
+        </div>
+    </div>
+
+    <div class="row m-4 shadow">
+        <canvas id="workinghours-graph" style="overflow-x: auto"></canvas>
+    </div>
+</div>

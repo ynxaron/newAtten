@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Satyam Prakash",
+    "role": "Backend Developer",
+    "skills": "Rust, WASM, Django",
+    "joined": "2nd Of August, 2025",
+    "image": "assets/profile_cropped.png",
+    "metrics": {
+      "hours": [8, 7.5, 9, 8.5, 7],
+      "features": [3, 4, 2, 5, 4],
+      "quality": [85, 90, 80, 88, 92]
+    },
+    "codeReviews": [12, 15],
+    "featuresTicked": [20, 25],
+    "codeEvaluation": [160, 180]
+  },
+  {
+    "name": "Shreyansh Kumar",
+    "role": "Backend Developer",
+    "skills": "Node.js, Express, MongoDB",
+    "joined": "3rd Of January, 2024",
+    "image": "assets/first_profile_round.png",
+    "metrics": {
+      "hours": [8, 7.5, 8.5, 9, 8],
+      "features": [4, 3, 5, 4, 4],
+      "quality": [88, 85, 87, 90, 89]
+    },
+    "codeReviews": [10, 14],
+    "featuresTicked": [18, 22],
+    "codeEvaluation": [140, 175]
+  },
+  {
+    "name": "Arpita Gupta",
+    "role": "UI/UX Designer",
+    "skills": "Figma, Sketch, CSS",
+    "joined": "15th Of April, 2023",
+    "image": "assets/second_profile_round.png",
+    "metrics": {
+      "hours": [7, 7.5, 6.5, 7, 7.5],
+      "features": [5, 4, 4, 3, 4],
+      "quality": [92, 90, 91, 89, 90]
+    },
+    "codeReviews": [13, 16],
+    "featuresTicked": [21, 24],
+    "codeEvaluation": [150, 165]
+  },
+  {
+    "name": "Aryan Kumar",
+    "role": "Full Stack Dev",
+    "skills": "Django, React, PostgreSQL",
+    "joined": "22nd Of June, 2024",
+    "image": "assets/third_profile_round.png",
+    "metrics": {
+      "hours": [8, 8, 8, 8, 8],
+      "features": [3, 3, 4, 5, 3],
+      "quality": [85, 88, 87, 86, 89]
+    },
+    "codeReviews": [11, 13],
+    "featuresTicked": [17, 20],
+    "codeEvaluation": [145, 155]
+  },
+  {
+    "name": "Priyanshu Raman",
+    "role": "DevOps Engineer",
+    "skills": "Docker, Kubernetes, CI/CD",
+    "joined": "10th Of October, 2022",
+    "image": "assets/fourth_profile_round.png",
+    "metrics": {
+      "hours": [9, 8.5, 9, 8.5, 9],
+      "features": [2, 3, 3, 2, 3],
+      "quality": [87, 89, 85, 90, 88]
+    },
+    "codeReviews": [9, 12],
+    "featuresTicked": [14, 17],
+    "codeEvaluation": [130, 145]
+  },
+  {
+    "name": "Sudharsanu Karara",
+    "role": "QA Engineer",
+    "skills": "Selenium, Jest, Cypress",
+    "joined": "1st Of February, 2025",
+    "image": "assets/fifth_profile_round.png",
+    "metrics": {
+      "hours": [7.5, 7, 7.5, 8, 7],
+      "features": [4, 3, 4, 4, 5],
+      "quality": [93, 92, 94, 91, 90]
+    },
+    "codeReviews": [14, 18],
+    "featuresTicked": [22, 26],
+    "codeEvaluation": [170, 190]
+  }
+]
