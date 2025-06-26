@@ -15,7 +15,7 @@
     "codeEvaluation": [160, 180]
   },
   {
-    "name": "Shreyansh Kumar",
+    "name": "Shreyansh Jain",
     "role": "Backend Developer",
     "skills": "Node.js, Express, MongoDB",
     "joined": "3rd Of January, 2024",
@@ -30,7 +30,7 @@
     "codeEvaluation": [140, 175]
   },
   {
-    "name": "Arpita Gupta",
+    "name": "Arpita Rajawat",
     "role": "UI/UX Designer",
     "skills": "Figma, Sketch, CSS",
     "joined": "15th Of April, 2023",
@@ -45,7 +45,7 @@
     "codeEvaluation": [150, 165]
   },
   {
-    "name": "Aryan Kumar",
+    "name": "Aryan Saxena",
     "role": "Full Stack Dev",
     "skills": "Django, React, PostgreSQL",
     "joined": "22nd Of June, 2024",
@@ -60,7 +60,7 @@
     "codeEvaluation": [145, 155]
   },
   {
-    "name": "Priyanshu Raman",
+    "name": "Priyanshu Kumar",
     "role": "DevOps Engineer",
     "skills": "Docker, Kubernetes, CI/CD",
     "joined": "10th Of October, 2022",
@@ -75,7 +75,7 @@
     "codeEvaluation": [130, 145]
   },
   {
-    "name": "Sudharsanu Karara",
+    "name": "Sudharsanu Tiwari",
     "role": "QA Engineer",
     "skills": "Selenium, Jest, Cypress",
     "joined": "1st Of February, 2025",

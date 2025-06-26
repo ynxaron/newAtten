@@ -41,7 +41,7 @@ function sidebarUI() {
   let checkinTime;
   let checkoutTime;
 
-  $.getJSON("app/data/user_info.json", function (data) {
+  $.getJSON("{{user_info}}", function (data) {
     if (data.username) {
       $("#username-display").text(data.username);
     } else {

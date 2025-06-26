@@ -1,7 +1,7 @@
-function setupDashboardUI() {
+function setupDashboardUI(onlineSrc, chartsInfo) {
   // BEGIN: PEERS WATCH LIST (through jquery)
   // defining the team data here, later can make this array into a parsed db request
-  $.getJSON("app/data/onlines.json", (data) => {
+  $.getJSON(onlineSrc, (data) => {
     let teamInfo = data;
 
     // This function would iterate over all the items in data/onlines.json and for each
@@ -127,7 +127,7 @@ function setupDashboardUI() {
       labels: ["Hours Logged", "Expected"],
       datasets: [
         {
-          data: [180, 70],
+          data: chartsInfo.hours_logged,
           backgroundColor: ["#825995", "#e0e0e0"],
           borderWidth: 0,
         },
@@ -155,7 +155,7 @@ function setupDashboardUI() {
       labels: ["Tickets Achieved", "Remaining"],
       datasets: [
         {
-          data: [9, 1],
+          data: chartsInfo.tickets_archieved,
           backgroundColor: ["#4ca3af", "#e0e0e0"],
           borderWidth: 0,
         },
@@ -183,7 +183,7 @@ function setupDashboardUI() {
       labels: ["Code Reviews", "Remaining"],
       datasets: [
         {
-          data: [9, 7],
+          data: chartsInfo.code_evaluated,
           backgroundColor: ["#825995", "#e0e0e0"],
           borderWidth: 0,
         },
@@ -206,16 +206,11 @@ function setupDashboardUI() {
   });
 
   // END: PROFILE OVERVIEW CHARTS
-  //
-  //
 
   // BEGIN: CALENDAR VIEW
   const allDays = moment.weekdaysShort();
   const weekDays = allDays.filter((day) => !["Sun", "Sat"].includes(day));
-  const workHours = [
-    0, 2, 5, 6, 4, 8, 7, 9, 3, 1, 0, 5, 8, 6, 7, 2, 4, 6, 9, 10, 8, 5, 3, 1, 0,
-    7, 9, 6, 4, 2,
-  ];
+  const workHours = chartsInfo.work_hours;
 
   const $calendar = $("#work-hours-calendar");
 
@@ -276,7 +271,7 @@ function setupDashboardUI() {
       datasets: [
         {
           label: "HOURS",
-          data: [5, 7, 4, 7, 5],
+          data: chartsInfo.week_work_info,
           backgroundColor: "rgba(124, 86, 247, 0.7)",
         },
       ],
@@ -297,7 +292,7 @@ function setupDashboardUI() {
       datasets: [
         {
           label: "HOURS",
-          data: [51, 40, 40, 52, 45, 39, 54, 40, 39, 50, 30, 25],
+          data: chartsInfo.month_work_info,
           backgroundColor: "rgba(124, 86, 247, 0.2)",
           borderColor: "rgba(124, 86, 247, 1)",
           tension: 0.3,
