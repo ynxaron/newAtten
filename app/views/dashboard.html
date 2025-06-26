@@ -59,7 +59,7 @@
                     <i class="fas fa-cog me-2"></i>Settings
                 </a>
 
-                <a class="nav-link" href="#!/">
+                <a class="nav-link" href="#!/" ng-click="logOut()">
                     <i class="fas fa-sign-out-alt me-2"></i>Log Out
                 </a>
             </nav>
@@ -160,7 +160,7 @@
                         <!-- Logout -->
                         <button
                             class="btn border border-white"
-                            ng-click="thisSelect('logout-btn')"
+                            ng-click="thisSelect('logout-btn'); logOut()"
                             ng-class="{'clicked': thisClick=='logout-btn'}"
                         >
                             <i class="fas fa-sign-out-alt"></i>
