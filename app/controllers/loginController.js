@@ -1,5 +1,6 @@
-newAtten.controller("loginController", function ($scope) {
+newAtten.controller("loginController", function ($scope, pictures) {
   localStorage.setItem("loggedIn", false);
+  $scope.loginPic = pictures.loginPic();
   $scope.login = function () {
     const useremail = $scope.useremail;
     const password = $scope.password;

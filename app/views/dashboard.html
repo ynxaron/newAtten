@@ -67,10 +67,10 @@
             <div class="mt-auto text-center">
                 <img
                     ng-src="{{profileImgSrc}}"
-                    class="rounded-circle mb-2"
+                    class="img-fluid rounded-circle mb-2"
                     style="width: 60px; height: 60px"
                 />
-                <p class="mb-0 fw-bold" id="username-display">Loading...</p>
+                <p class="mb-0 fw-bold">{{userName}}</p>
                 <small>Developer</small>
             </div>
         </div>
@@ -118,6 +118,7 @@
                         <!-- Left: Profile Picture -->
                         <img
                             ng-src="{{profileImgSrc}}"
+                            class="img-fluid"
                             alt="Profile"
                             style="
                                 width: 70px;
@@ -199,7 +200,7 @@
                         <img
                             ng-src="{{profileImgSrc}}"
                             alt="Profile"
-                            class="rounded-circle"
+                            class="rounded-circle img-fluid"
                             style="width: 40px; height: 40px; object-fit: cover"
                         />
                     </button>

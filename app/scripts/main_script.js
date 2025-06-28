@@ -155,7 +155,7 @@ function setupDashboardUI(onlineSrc, chartsInfo) {
       labels: ["Tickets Achieved", "Remaining"],
       datasets: [
         {
-          data: chartsInfo.tickets_archieved,
+          data: chartsInfo.tickets_archived,
           backgroundColor: ["#4ca3af", "#e0e0e0"],
           borderWidth: 0,
         },

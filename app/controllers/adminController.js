@@ -3,6 +3,14 @@ newAtten.controller("adminController", function ($scope, $http) {
   // BEGIN: Collecting All Names
   $scope.employeeNames = [];
   $scope.nameChoosen = "Satyam Prakash";
+
+  // BEGIN: Defining charts so that they can be updated via ng-change
+  $scope.hoursChart = null;
+  $scope.featureChart = null;
+  $scope.codeChart = null;
+  $scope.lineChart = null;
+  // END: Defining charts so that they can be updated via ng-change
+
   $http
     .get("app/data/employee_info.json")
     .then(function (response) {
@@ -24,118 +32,137 @@ newAtten.controller("adminController", function ($scope, $http) {
         );
       };
       // END: Of the function that would let us dynamically use each attr
+      // BEGIN: A function that would select that person which has the name matching from selected
 
-      // BEGIN: Defining the Charts That are available beside it
-      new Chart(document.getElementById("Hours-Metric"), {
-        type: "doughnut",
-        data: {
-          labels: ["Hours Logged", "Expected"],
-          datasets: [
-            {
-              data: $scope.getAttr($scope.nameChoosen, "codeReviews"),
-              backgroundColor: ["#825995", "#e0e0e0"],
-              borderWidth: 0,
-            },
-          ],
-        },
+      $scope.selectPerson = function () {
+        $scope.personChoosen = response.data.find(
+          (person) => person.name == $scope.nameChoosen,
+        );
 
-        options: {
-          plugins: {
-            legend: {
-              labels: {
-                font: {
-                  size: 18,
-                  weight: "bold",
+        // Destroy previous charts if they exist
+        if ($scope.hoursChart) $scope.hoursChart.destroy();
+        if ($scope.featureChart) $scope.featureChart.destroy();
+        if ($scope.codeChart) $scope.codeChart.destroy();
+        if ($scope.lineChart) $scope.lineChart.destroy();
+
+        $scope.hoursChart = new Chart(document.getElementById("Hours-Metric"), {
+          type: "doughnut",
+          data: {
+            labels: ["Hours Logged", "Expected"],
+            datasets: [
+              {
+                data: $scope.personChoosen.codeReviews,
+                backgroundColor: ["#825995", "#e0e0e0"],
+                borderWidth: 0,
+              },
+            ],
+          },
+
+          options: {
+            plugins: {
+              legend: {
+                labels: {
+                  font: {
+                    size: 18,
+                    weight: "bold",
+                  },
+                  color: "#808080",
                 },
-                color: "#808080",
               },
             },
           },
-        },
-      });
+        });
 
-      new Chart(document.getElementById("Feature-Ticked"), {
-        type: "doughnut",
-        data: {
-          labels: ["Tickets Achieved", "Remaining"],
-          datasets: [
-            {
-              data: $scope.getAttr($scope.nameChoosen, "featuresTicked"),
-              backgroundColor: ["#4ca3af", "#e0e0e0"],
-              borderWidth: 0,
-            },
-          ],
-        },
-
-        options: {
-          plugins: {
-            legend: {
-              labels: {
-                font: {
-                  size: 18,
-                  weight: "bold",
+        $scope.featureChart = new Chart(
+          document.getElementById("Feature-Ticked"),
+          {
+            type: "doughnut",
+            data: {
+              labels: ["Tickets Achieved", "Remaining"],
+              datasets: [
+                {
+                  data: $scope.personChoosen.featuresTicked,
+                  backgroundColor: ["#4ca3af", "#e0e0e0"],
+                  borderWidth: 0,
                 },
-                color: "#808080",
+              ],
+            },
+
+            options: {
+              plugins: {
+                legend: {
+                  labels: {
+                    font: {
+                      size: 18,
+                      weight: "bold",
+                    },
+                    color: "#808080",
+                  },
+                },
               },
             },
           },
-        },
-      });
+        );
 
-      new Chart(document.getElementById("Code-Evaluation"), {
-        type: "doughnut",
-        data: {
-          labels: ["Code Reviews", "Remaining"],
-          datasets: [
-            {
-              data: $scope.getAttr($scope.nameChoosen, "codeEvaluation"),
-              backgroundColor: ["#825995", "#e0e0e0"],
-              borderWidth: 0,
-            },
-          ],
-        },
-
-        options: {
-          plugins: {
-            legend: {
-              labels: {
-                font: {
-                  size: 18,
-                  weight: "bold",
+        $scope.codeChart = new Chart(
+          document.getElementById("Code-Evaluation"),
+          {
+            type: "doughnut",
+            data: {
+              labels: ["Code Reviews", "Remaining"],
+              datasets: [
+                {
+                  data: $scope.personChoosen.codeEvaluation,
+                  backgroundColor: ["#825995", "#e0e0e0"],
+                  borderWidth: 0,
                 },
-                color: "#808080",
+              ],
+            },
+
+            options: {
+              plugins: {
+                legend: {
+                  labels: {
+                    font: {
+                      size: 18,
+                      weight: "bold",
+                    },
+                    color: "#808080",
+                  },
+                },
               },
             },
           },
-        },
-      });
+        );
 
-      // BEGIN: Line Graph of Working Hours
-      new Chart(document.getElementById("workinghours-graph"), {
-        type: "line",
-        data: {
-          labels: moment.weekdaysShort().slice(1, -1),
-          datasets: [
-            {
-              label: "HOURS",
-              data: $scope.getAttr($scope.nameChoosen, "metrics")["hours"],
-              backgroundColor: "rgba(124, 86, 247, 0.2)",
-              borderColor: "rgba(124, 86, 247, 1)",
-              tension: 0.3,
-              fill: true,
+        // BEGIN: Line Graph of Working Hours
+        $scope.lineChart = new Chart(
+          document.getElementById("workinghours-graph"),
+          {
+            type: "line",
+            data: {
+              labels: moment.monthsShort(),
+              datasets: [
+                {
+                  label: "HOURS",
+                  data: $scope.getAttr($scope.nameChoosen, "metrics")["months"],
+                  backgroundColor: "rgba(124, 86, 247, 0.2)",
+                  borderColor: "rgba(124, 86, 247, 1)",
+                  tension: 0.3,
+                  fill: true,
+                },
+              ],
             },
-          ],
-        },
-        options: {
-          plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true } },
-        },
-      });
-
-      // END: Line Graph of Working Hours
+            options: {
+              plugins: { legend: { display: false } },
+              scales: { y: { beginAtZero: true } },
+            },
+          },
+        );
+      };
+      // END: A function that would select that person which has the name matching from selected
     })
     .catch(function () {
       console.log("Wasn't Able to Get values");
     });
-  // END: Collecting All Names;
 });
