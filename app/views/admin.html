@@ -6,6 +6,7 @@
         <select
             class="form-select"
             ng-model="nameChoosen"
+            ng-change="changeUser()"
             ng-options="name for name in employeeNames"
         ></select>
     </div>

@@ -2,6 +2,7 @@ newAtten.controller("adminController", function ($scope, $http) {
   // First of all, we collect all the names in an employeeNames (needed for dropdown)
   // BEGIN: Collecting All Names
   $scope.employeeNames = [];
+  //$scope.changeUser = function () {} This is for calling when changed
   $scope.nameChoosen = "Satyam Prakash";
   $http
     .get("app/data/employee_info.json")

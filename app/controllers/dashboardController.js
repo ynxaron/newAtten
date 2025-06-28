@@ -1,14 +1,22 @@
 newAtten.controller(
   "dashboardController",
+  // BEGIN: Checking Login
+  // This function would check whether localStorage loggedIn is true of not, that means
+  // whether the user has truly logged in, or is accessing the dashboard via direct link
   function ($scope, $http, $interval, $timeout, pictures, jsons, $log) {
     if (localStorage.getItem("loggedIn") === false) {
       window.location.href = "/";
       return;
     }
+    // END: Checking Login
+    // BEGIN: Defining Common Values, by default "DB ERROR" that would have values later
     $scope.userName = "DB ERROR";
     $scope.userJob = "DB ERROR";
     $scope.currentTime = "DB ERROR";
     $scope.firstName = "DB ERROR";
+    $scope.userSkills = "DB ERROR";
+    $scope.joined = "DB ERROR";
+    // END: Defining Common Values, by default "DB ERROR" that would have values later
 
     // BEGIN: Adding Functionalities to Services across dashboard
     // Pictures
@@ -20,7 +28,6 @@ newAtten.controller(
     $scope.user_info = jsons.user_info();
     $scope.user_session = jsons.user_session();
     $scope.thisuser_data = jsons.thisuser_data();
-    $scope.thisuser_dataval = null;
     // END: Adding Functionalities to Services across dashboard
     //
     // BEGIN: Extracting JSON Object from thisuser_info.
@@ -62,6 +69,15 @@ newAtten.controller(
       $scope.userName = response.data.username;
       $scope.userJob = response.data.userjob;
       $scope.firstName = $scope.userName.split(" ")[0];
+      $scope.userSkills = response.data.skills;
+      $scope.joined = response.data.joined;
+    });
+
+    $http.get(jsons.usersession_info()).then((response) => {
+      $scope.total_leaves_taken = response.data.total_leaves_taken;
+      $scope.total_leaves_left = response.data.total_leaves_left;
+      $scope.paid_overtime = response.data.paid_overtime;
+      $scope.total_absent = response.data.total_absent;
     });
 
     $interval(() => {

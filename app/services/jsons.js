@@ -14,4 +14,7 @@ newAtten.service("jsons", function () {
   this.thisuser_data = function () {
     return "app/data/thisuser_data.json";
   };
+  this.usersession_info = function () {
+    return "app/data/usersession_info.json";
+  };
 });

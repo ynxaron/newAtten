@@ -70,7 +70,7 @@
                     class="rounded-circle mb-2"
                     style="width: 60px; height: 60px"
                 />
-                <p class="mb-0 fw-bold" id="username-display">Loading...</p>
+                <p class="mb-0 fw-bold" id="username-display">{{firstName}}</p>
                 <small>Developer</small>
             </div>
         </div>
@@ -211,25 +211,25 @@
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
                     <div class="stat-box">
-                        <h4 class="fw-bold">42h</h4>
+                        <h4 class="fw-bold">{{total_leaves_taken}}h</h4>
                         <small>Total Leaves Taken</small>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stat-box">
-                        <h4 class="fw-bold">83h</h4>
+                        <h4 class="fw-bold">{{total_leaves_left}}h</h4>
                         <small>Total Leaves Left</small>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stat-box">
-                        <h4 class="fw-bold">100h</h4>
+                        <h4 class="fw-bold">{{paid_overtime}}h</h4>
                         <small>Paid Overtime</small>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stat-box">
-                        <h4 class="fw-bold">25d</h4>
+                        <h4 class="fw-bold">{{total_absent}}d</h4>
                         <small>Total Absents</small>
                     </div>
                 </div>
@@ -249,13 +249,11 @@
                         style="max-width: 200px; height: auto"
                     />
                     <div class="ms-md-4 mt-4 mt-md-0 text-center text-md-start">
-                        <p class="display-6 fw-bold mb-2">Satyam Prakash</p>
-                        <p class="h4 fw-bold text-muted mb-2">
-                            Backend Developer
-                        </p>
-                        <p class="h5 mb-2">Django, Rust, WASM</p>
+                        <p class="display-6 fw-bold mb-2">{{userName}}</p>
+                        <p class="h4 fw-bold text-muted mb-2">{{userJob}}</p>
+                        <p class="h5 mb-2">{{userSkills}}</p>
                         <p class="h6 mt-3">
-                            Joined <strong>2nd Of August, 2025</strong>
+                            Joined <strong>{{joined}}</strong>
                         </p>
                     </div>
                 </div>

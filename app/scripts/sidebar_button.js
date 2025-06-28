@@ -41,14 +41,6 @@ function sidebarUI() {
   let checkinTime;
   let checkoutTime;
 
-  $.getJSON("{{user_info}}", function (data) {
-    if (data.username) {
-      $("#username-display").text(data.username);
-    } else {
-      console.error("There was an error displaying the user name");
-    }
-  });
-
   // User Utility Function
   // This Utility Function Shows Any Text.
   function showText(message) {
