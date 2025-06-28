@@ -1,7 +1,7 @@
 newAtten.controller(
   "dashboardController",
   function ($scope, $http, $interval, $timeout, pictures, jsons, $log) {
-    if (localStorage.getItem("loggedIn") === false) {
+    if (localStorage.getItem("loggedIn") === "false") {
       window.location.href = "/";
       return;
     }
