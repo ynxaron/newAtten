@@ -34,20 +34,22 @@ newAtten.controller(
     // This would be used to pass the json object to main_script wrapper
     // function so that this could then be indexed to provide charts with address
     // else, this would log the error
+    // we are loading the DOM when we can read the $scope.thisuser_data value
     $http
-      // we are loading the DOM when we can read the $scope.thisuser_data value
       .get($scope.thisuser_data)
       .then(function (response) {
-        $timeout(() => {
-          if (typeof setupDashboardUI === "function")
-            // Sending source of online profiles & charts and calendars as well (in an object)
+        $timeout(function () {
+          if (typeof setupDashboardUI === "function") {
             setupDashboardUI($scope.onlines, response.data);
-          if (typeof sidebarUI === "function") sidebarUI();
+          }
+          if (typeof sidebarUI === "function") {
+            sidebarUI();
+          }
         }, 0);
       })
       .catch(function () {
-        $log.error(
-          "Cannot Get data at the given source: " + $scope.thiseuser_data,
+        console.error(
+          "Cannot Get Data from the given source: " + $scope.thisuser_data,
         );
       });
     // END: Extracting JSON Object from thisuser_info
@@ -65,13 +67,20 @@ newAtten.controller(
       };
     }, 100);
 
-    $http.get($scope.user_info).then((response) => {
-      $scope.userName = response.data.username;
-      $scope.userJob = response.data.userjob;
-      $scope.firstName = $scope.userName.split(" ")[0];
-      $scope.userSkills = response.data.skills;
-      $scope.joined = response.data.joined;
-    });
+    $http
+      .get($scope.user_info)
+      .then((response) => {
+        $scope.userName = response.data.username;
+        $scope.userJob = response.data.userjob;
+        $scope.firstName = $scope.userName.split(" ")[0];
+        $scope.userSkills = response.data.skills;
+        $scope.joined = response.data.joined;
+      })
+      .catch(function () {
+        console.error(
+          "DB ERROR! Failed To GET UserInfo From: " + $scope.user_info,
+        );
+      });
 
     $http.get(jsons.usersession_info()).then((response) => {
       $scope.total_leaves_taken = response.data.total_leaves_taken;
