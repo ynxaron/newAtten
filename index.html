@@ -35,9 +35,9 @@
         <!--High Charts-->
         <script src="https://code.highcharts.com/highcharts.js"></script>
 
-        <script src="app/scripts/showtext.js"></script>
-        <script src="app/scripts/main_script.js"></script>
-        <script src="app/scripts/sidebar_button.js"></script>
+        <script src="app/js/scripts/showtext.js"></script>
+        <script src="app/js/scripts/main_script.js"></script>
+        <script src="app/js/scripts/sidebar_button.js"></script>
         <script src="app/app.module.js"></script>
 
         <!--Importing MomentJs-->
@@ -45,16 +45,19 @@
         <link rel="stylesheet" href="app/styles/main_style.css" />
 
         <!--Importing Controller-->
-        <script src="app/controllers/loginController.js"></script>
-        <script src="app/controllers/dashboardController.js"></script>
-        <script src="app/controllers/adminController.js"></script>
+        <script src="app/js/controllers/loginController.js"></script>
+        <script src="app/js/controllers/dashboardController.js"></script>
+        <script src="app/js/controllers/adminController.js"></script>
 
         <!--Importing Services-->
-        <script src="app/services/pictures.js"></script>
-        <script src="app/services/jsons.js"></script>
+        <script src="app/js/services/pictures.js"></script>
+        <script src="app/js/services/jsons.js"></script>
     </head>
 
     <body>
-        <div ng-view></div>
+        <div class="row">
+            <div id="text-container pb-5"></div>
+            <div ng-view></div>
+        </div>
     </body>
 </html>
