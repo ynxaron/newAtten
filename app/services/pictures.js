@@ -9,4 +9,8 @@ newAtten.service("pictures", function () {
   this.djuboImg = function () {
     return "assets/djubo-cropped.png";
   };
+
+  this.loginPic = function () {
+    return "assets/login-pic.jpeg";
+  };
 });
