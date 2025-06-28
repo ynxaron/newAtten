@@ -112,8 +112,8 @@ function sidebarUI() {
       showText("RESUMED @" + moment().format("HH:mm"));
       console.log("RESUMED @" + moment().format("HH:mm"));
     } else if ($("#break-btn strong").text() == "RESUME") {
-      showText("Break Begins @" + moment().format("HH:mm"));
-      console.log("Break Begins @" + moment().format("HH:mm"));
+      showText("BREAK @" + moment().format("HH:mm"));
+      console.log("BREAK @" + moment().format("HH:mm"));
     }
   });
   // END: Defining the response to button pressing
