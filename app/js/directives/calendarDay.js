@@ -25,7 +25,6 @@ angular.module("newAtten").directive("dayBox", function () {
         textAlign: "center",
         fontWeight: "bold",
       };
-      console.log("Hello");
     },
   };
 });

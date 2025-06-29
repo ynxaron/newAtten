@@ -23,6 +23,26 @@ newAtten.controller(
     $scope.thisuser_dataval = null;
     // END: Adding Functionalities to Services across dashboard
     //
+    // BEGIN: Defining a function that would send JSON for directive for collegue view
+    $http.get($scope.onlines).then(function (response) {
+      $scope.getCollegueInfo = response.data.map(function (member, index) {
+        let online = member.online; // this would be used to send appropriate icon (offline/ online)
+        return {
+          name: member.name,
+          photo: member.photo,
+          online: member.online,
+          index: index,
+          title: member.title,
+          update: member.update,
+          firstName: member.name.split(" ")[0],
+          onlineStatusIcon: online
+            ? "fas fa-circle me-3 text-success"
+            : "fas fa-circle me-3 text-secondary",
+        };
+      });
+      console.log("Processed getCollegueInfo: " + $scope.getCollegueInfo);
+    });
+    // END: Defining a function that would send JSON for directive for collegue view
     // BEGIN: Extracting JSON Object from thisuser_info.
     // This would be used to pass the json object to main_script wrapper
     // function so that this could then be indexed to provide charts with address
@@ -43,12 +63,15 @@ newAtten.controller(
           },
         );
         // END: Defining a function that would send data as json object for calendar overview directive
+        //
+        // BEGIN: Defining a function that would send data as json object for Online Collegues View
 
+        // END: Defining a function that would send data as json object for Online Collegues View
         // BEGIN: Setting Up External JS Scripts via variables defined here
         $timeout(() => {
           if (typeof setupDashboardUI === "function")
             // Sending source of online profiles & charts and calendars as well (in an object)
-            setupDashboardUI($scope.onlines, response.data);
+            setupDashboardUI(response.data);
           if (typeof sidebarUI === "function") sidebarUI();
         }, 0);
         // END: Setting Up External JS Scripts via variables defined here
@@ -77,6 +100,12 @@ newAtten.controller(
       $scope.userName = response.data.username;
       $scope.userJob = response.data.userjob;
       $scope.firstName = $scope.userName.split(" ")[0];
+      // BEGIN: Petty Profile Info
+      $scope.total_leaves_taken = response.data.total_leaves_taken;
+      $scope.total_leaves_left = response.data.total_leaves_left;
+      $scope.paid_overtime = response.data.paid_overtime;
+      $scope.total_absent = response.data.total_absent;
+      // END: Petty Profile Info
     });
 
     $interval(() => {

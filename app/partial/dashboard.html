@@ -213,25 +213,25 @@
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
                     <div class="stat-box">
-                        <h4 class="fw-bold">42h</h4>
+                        <h4 class="fw-bold">{{total_leaves_taken}}h</h4>
                         <small>Total Leaves Taken</small>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stat-box">
-                        <h4 class="fw-bold">83h</h4>
+                        <h4 class="fw-bold">{{total_leaves_left}}h</h4>
                         <small>Total Leaves Left</small>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stat-box">
-                        <h4 class="fw-bold">100h</h4>
+                        <h4 class="fw-bold">{{paid_overtime}}h</h4>
                         <small>Paid Overtime</small>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stat-box">
-                        <h4 class="fw-bold">25d</h4>
+                        <h4 class="fw-bold">{{total_absent}}d</h4>
                         <small>Total Absents</small>
                     </div>
                 </div>
@@ -279,15 +279,17 @@
 
             <div
                 class="row shadow m-2 p-3 shadow-lg rounded"
-                max-style="height: 700px"
+                style="max-height: 700px"
             >
                 <h1 class="mt-5 ms-3 fw-bold">Your Team</h1>
                 <div
                     class="row row-cols-1 row-cols-md-2 g-4 position-relative"
                     id="teamOverview"
                 >
-                    <!-- Teams Info, injected throguh JQuery--->
-                    <!-- Teams Info, injected throguh JQuery--->
+                    <collegue-view
+                        ng-repeat="collegueInfo in getCollegueInfo"
+                        props="collegueInfo"
+                    ></collegue-view>
                 </div>
             </div>
 
