@@ -31,12 +31,27 @@ newAtten.controller(
       // we are loading the DOM when we can read the $scope.thisuser_data value
       .get($scope.thisuser_data)
       .then(function (response) {
+        // BEGIN: Defining a function that would send data as json object for calendar overview directive
+        $scope.weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        $scope.dayInfoArr = response.data.work_hours.map(
+          function (hours, index) {
+            return {
+              hours: hours,
+              dayNum: index + 1,
+              weekDay: $scope.weekDays[(index + 1) % 7],
+            };
+          },
+        );
+        // END: Defining a function that would send data as json object for calendar overview directive
+
+        // BEGIN: Setting Up External JS Scripts via variables defined here
         $timeout(() => {
           if (typeof setupDashboardUI === "function")
             // Sending source of online profiles & charts and calendars as well (in an object)
             setupDashboardUI($scope.onlines, response.data);
           if (typeof sidebarUI === "function") sidebarUI();
         }, 0);
+        // END: Setting Up External JS Scripts via variables defined here
       })
       .catch(function () {
         $log.error(

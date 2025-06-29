@@ -295,7 +295,12 @@
 
             <div class="mt-5 mb-4 chart-box shadow">
                 <h4><strong>Heat Map</strong></h4>
-                <div class="calendar" id="work-hours-calendar"></div>
+                <div class="calendar" id="work-hours-calendar">
+                    <day-box
+                        ng-repeat="dayInfo in dayInfoArr"
+                        props="dayInfo"
+                    ></day-box>
+                </div>
             </div>
 
             <!--Hours By Week Map-->

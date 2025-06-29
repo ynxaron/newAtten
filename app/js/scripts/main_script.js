@@ -209,51 +209,7 @@ function setupDashboardUI(onlineSrc, chartsInfo) {
 
   // BEGIN: CALENDAR VIEW
   const allDays = moment.weekdaysShort();
-  const weekDays = allDays.filter((day) => !["Sun", "Sat"].includes(day));
-  const workHours = chartsInfo.work_hours;
-
-  const $calendar = $("#work-hours-calendar");
-
-  $.each(workHours, function (index, hours) {
-    const lightness = 100 - hours * 7;
-    const dayNum = index + 1;
-    const weekday = weekDays[index % 7];
-
-    // Creating The Div To Be Injected: BEGIN
-    const $boxJQ = $("<div></div>", {
-      class: "day-box",
-      css: {
-        backgroundColor: `hsl(270, 60%, ${lightness}%)`,
-        color: lightness > 75 ? "#333" : "#fff",
-        position: "relative", // needed for absolute children
-        padding: "12px",
-        textAlign: "center",
-        fontWeight: "bold",
-      },
-    });
-
-    const $dayNumJQ = $("<div></div>", {
-      text: dayNum,
-      css: {
-        fontSize: "24px",
-        marginBottom: "8px",
-      },
-    });
-
-    const $weekdayJQ = $("<div></div>", {
-      text: weekday,
-      css: {
-        fontSize: "12px",
-        position: "absolute",
-        bottom: "4px",
-        right: "6px",
-      },
-    });
-
-    $boxJQ.append($dayNumJQ).append($weekdayJQ);
-    $calendar.append($boxJQ);
-    // Creating a day-box to be rejected: END
-  });
+  const weekDays = allDays.slice(1, -1);
 
   // Changing The Colors When Hovered: Begin
   $("#box-container").on("mouseenter", () => {
