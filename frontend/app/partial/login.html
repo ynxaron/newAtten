@@ -1,0 +1,66 @@
+<style>
+    body {
+        background: linear-gradient(135deg, #f5f7ff, #e8ecff);
+        font-family: "Segoe UI", sans-serif;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+<body>
+    <div class="login-container">
+        <img ng-src="{{loginPic}}" alt="User Profile" />
+        <h4 class="mb-3 fw-bold">Welcome to DJUBO</h4>
+
+        <form ng-submit="login()">
+            <div class="mb-3 text-start">
+                <label for="useremail" class="form-label">Username</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    ng-model="useremail"
+                    required
+                />
+            </div>
+            <div class="mb-3 text-start">
+                <label for="password" class="form-label">Password</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    ng-model="password"
+                    required
+                />
+            </div>
+            <div class="d-grid">
+                <button
+                    type="submit"
+                    class="btn btn-login"
+                    id="login-button"
+                    style="background-color: #825995"
+                >
+                    Login
+                </button>
+            </div>
+
+            <div ng-if="loginMessage" class="mt-3 text-danger">
+                {{ loginMessage }}
+            </div>
+        </form>
+
+        <p class="mt-3 form-text">
+            Forgot your password? <a href="#">Reset it here</a>
+        </p>
+    </div>
+
+    <div
+        id="text-container"
+        style="
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1055;
+        "
+    ></div>
+</body>

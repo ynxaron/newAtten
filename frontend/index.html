@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" ng-app="newAtten">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Employee Attendance App</title>
+
+        <!-- Bootstrap -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome-->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/handsontable@13.0.0/dist/handsontable.full.min.css"
+        />
+
+        <!--Importing Styles-->
+        <link rel="stylesheet" href="app/styles/main_style.css" />
+        <link rel="stylesheet" href="app/styles/login_style.css" />
+
+        <script src="https://cdn.jsdelivr.net/npm/handsontable@13.0.0/dist/handsontable.full.min.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script src="https://code.angularjs.org/1.8.2/angular-route.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-min.js"></script>
+
+        <!-- Chartjs -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!--High Charts-->
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+
+        <script src="app/js/scripts/showtext.js"></script>
+        <script src="app/js/scripts/main_script.js"></script>
+        <script src="app/js/scripts/sidebar_button.js"></script>
+        <script src="app/js/app.module.js"></script>
+
+        <!--Importing MomentJs-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+        <!--Importing Controller-->
+        <script src="app/js/controllers/loginController.js"></script>
+        <script src="app/js/controllers/dashboardController.js"></script>
+        <script src="app/js/controllers/adminController.js"></script>
+
+        <!--Custom Directives-->
+        <script src="app/js/directives/calendarDay.js"></script>
+        <script src="app/js/directives/collegueView.js"></script>
+
+        <!--Importing Services-->
+        <script src="app/js/services/pictures.js"></script>
+        <script src="app/js/services/jsons.js"></script>
+    </head>
+
+    <body>
+        <div class="row">
+            <div id="text-container pb-5"></div>
+            <div ng-view></div>
+        </div>
+    </body>
+</html>

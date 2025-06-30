@@ -1,0 +1,77 @@
+body {
+    background: #f5f7ff;
+}
+.sidebar {
+    background: #fff;
+    height: 100vh;
+    padding: 1.5rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+}
+.sidebar .nav-link {
+    color: #555;
+    margin: 0.5rem 0;
+}
+.sidebar .nav-link:hover {
+    background: #e8ecff;
+    border-radius: 8px;
+}
+.stat-box {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+.chart-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.right-panel {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.calendar td {
+    text-align: center;
+    padding: 0.5rem;
+}
+.calendar .today {
+    background-color: #e0e7ff;
+    border-radius: 50%;
+}
+.gallery-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar .day-box {
+    height: 100px;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.btn.clicked {
+    background-color: #825995 !important;
+    color: white !important;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
