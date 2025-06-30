@@ -281,13 +281,21 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
       // END: A function that would select that person which has the name matching from selected
       //
       // BEGIN: Describing An Handsontable using the value from jsons.emp_info()
-      let ourdata = [["Name", "Role", "Skills", "Joined"]];
+      let ourdata = [["Name", "Role", "Skills", "Joined", "Hours"]];
       _.each($scope.employeeNames, function (name) {
+        // Here we would take the average working hour of the person throughout the month
+        let months = $scope.getAttr(name, "metrics")["months"];
+        let months_sum = months.reduce((a, b) => a + b);
+        let months_avg = (
+          months.length ? months_sum / months.length : 0
+        ).toFixed(1);
+
         let this_entry = [
           name,
           $scope.getAttr(name, "role"),
           $scope.getAttr(name, "skills"),
           $scope.getAttr(name, "joined"),
+          months_avg,
         ];
         ourdata.push(this_entry);
       });
