@@ -1,14 +1,16 @@
+// The function would take two arguments, one optional and one essential.
+// In optional argument it clarifies the color you want this box to be,
+// and in essential what message you want this box to deliever
 function showText(message, color = "#825995") {
   const $text = $(`
         <div style="
-          background-color: #825995;
+          background-color: ${color},
           color: white;
           padding: 10px 20px;
           border-radius: 10px;
           margin-top: 10px;
           font-weight: 500;
           box-shadow: 0 0 10px rgba(0,0,0,0.1);
-          animation: fadeInOut 2s ease-in-out;
         ">
           ${message}
         </div>

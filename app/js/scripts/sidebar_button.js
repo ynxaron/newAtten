@@ -28,12 +28,15 @@ function sidebarUI() {
     .appendTo("body");
 
   $hoverArea.on("mouseenter", () => {
+    // We would change the css of sidebar, moving it till it is no longer moved -100%
+    // and we would change the margin of our main_content, moving it equally right ways
     $sidebar.css("transform", "translateX(0)");
     $mainContent.css("margin-left", "260px");
   });
 
   // When mouse leaves sidebar, hide it again
   $sidebar.on("mouseleave", () => {
+    // we are doing the exact opposite here,
     $sidebar.css("transform", "translateX(-100%)");
     $mainContent.css("margin-left", "0");
   });
