@@ -6,7 +6,7 @@ angular.module("newAtten").directive("collegueView", function () {
     },
     template: `
       <div class="col position-relative z-2">
-        <div class="d-flex align-items-center p-4">
+        <div class="d-flex align-items-center flex-wrap p-4">
           <button
             class="btn btn-white border-white"
             role="button"

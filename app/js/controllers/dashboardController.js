@@ -20,7 +20,6 @@ newAtten.controller(
     $scope.user_info = jsons.user_info();
     $scope.user_session = jsons.user_session();
     $scope.thisuser_data = jsons.thisuser_data();
-    $scope.thisuser_dataval = null;
     // END: Adding Functionalities to Services across dashboard
     //
     // BEGIN: Defining a function that would send JSON for directive for collegue view

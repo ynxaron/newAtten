@@ -1,42 +1,42 @@
 [
   {
     "photo": "assets/first_profile_round.png",
-    "name": "Shreyansh Kumar",
+    "name": "Shreyansh Jain",
     "title": "Backend Developer",
     "update": "Fixed checkout time zone bug",
     "online": true
   },
   {
     "photo": "assets/second_profile_round.png",
-    "name": "Arpita Gupta",
+    "name": "Arpita Rajawat",
     "title": "UI/UX Designer",
     "update": "Updated booking form styling",
     "online": false
   },
   {
     "photo": "assets/third_profile_round.png",
-    "name": "Aryan Kumar",
+    "name": "Aryan Saxena",
     "title": "Full Stack Dev",
     "update": "Added minibar report API",
     "online": true
   },
   {
     "photo": "assets/fourth_profile_round.png",
-    "name": "Priyanshu Raman",
+    "name": "Priyanshu Kumar",
     "title": "DevOps Engineer",
     "update": "Deployed booking app to staging",
     "online": false
   },
   {
     "photo": "assets/fifth_profile_round.png",
-    "name": "Sudharsanu Karara",
+    "name": "Sudharsanu Tiwari",
     "title": "QA Engineer",
     "update": "Added tests for guest login",
     "online": true
   },
   {
     "photo": "assets/sixth_profile_round.png",
-    "name": "Aryan Diwana",
+    "name": "Aryan Kumar",
     "title": "Frontend Developer",
     "update": "Refactored calendar component",
     "online": false

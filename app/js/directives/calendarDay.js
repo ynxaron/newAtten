@@ -8,10 +8,12 @@ angular.module("newAtten").directive("dayBox", function () {
       props: "=",
     },
     template: `
-      <div class="day-box" ng-style="style">
-        <div style="font-size: 24px; margin-bottom: 8px;">{{props.dayNum}}</div>
-        <div style="font-size: 12px; position: absolute; bottom: 4px; right: 6px;">{{props.weekDay}}</div>
-      </div>
+        <div class="col text-center" style="min-width: 17%">
+          <div class="day-box" ng-style="style">
+            <div style="font-size: 24px; margin-bottom: 8px;">{{props.dayNum}}</div>
+            <div style="font-size: 12px; position: absolute; bottom: 4px; right: 6px;">{{props.weekDay}}</div>
+          </div>
+        </div>
     `,
     link: function (scope) {
       // here we are multiplying by 7 because each day the working hours do not range

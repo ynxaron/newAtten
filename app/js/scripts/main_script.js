@@ -51,6 +51,8 @@ function setupDashboardUI(chartsInfo) {
     },
 
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           labels: {
@@ -79,6 +81,8 @@ function setupDashboardUI(chartsInfo) {
     },
 
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           labels: {
@@ -107,6 +111,8 @@ function setupDashboardUI(chartsInfo) {
     },
 
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           labels: {
@@ -177,6 +183,50 @@ function setupDashboardUI(chartsInfo) {
       scales: { y: { beginAtZero: true } },
     },
   });
+
   // END: MONTH WORK VIEW
-  // BEGIN:
+  // BEGIN: Defining the Year Week Chart
+
+  let data = chartsInfo.years_work_info;
+  new Chart($("#HoursByYears"), {
+    type: "line",
+    data: {
+      labels: data.map((_, i) => `200${i + 1}`), // ["Year 1", "Year 2", ...]
+      datasets: [
+        {
+          label: "Work Hours",
+          data: data,
+          borderColor: "#4e73df",
+          backgroundColor: "#4e73df",
+          tension: 0.3,
+          fill: false,
+          pointRadius: 3,
+          pointBackgroundColor: "#4e73df",
+          pointBorderColor: "#fff",
+          borderWidth: 2,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Year",
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: "Hours",
+          },
+          beginAtZero: true,
+        },
+      },
+    },
+  });
 }
