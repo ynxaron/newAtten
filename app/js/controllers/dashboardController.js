@@ -25,7 +25,7 @@ newAtten.controller(
     //
     // BEGIN: Defining a function that would send JSON for directive for collegue view
     $http.get($scope.onlines).then(function (response) {
-      $scope.getCollegueInfo = response.data.map(function (member, index) {
+      $scope.getCollegueInfo = _.map(response.data, function (member, index) {
         let online = member.online; // this would be used to send appropriate icon (offline/ online)
         return {
           name: member.name,
@@ -53,7 +53,8 @@ newAtten.controller(
       .then(function (response) {
         // BEGIN: Defining a function that would send data as json object for calendar overview directive
         $scope.weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        $scope.dayInfoArr = response.data.work_hours.map(
+        $scope.dayInfoArr = _.map(
+          response.data.work_hours,
           function (hours, index) {
             return {
               hours: hours,

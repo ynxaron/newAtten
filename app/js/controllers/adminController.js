@@ -279,6 +279,26 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
         );
       };
       // END: A function that would select that person which has the name matching from selected
+      //
+      // BEGIN: Describing An Handsontable using the value from jsons.emp_info()
+      let ourdata = [["Name", "Role", "Skills", "Joined"]];
+      _.each($scope.employeeNames, function (name) {
+        let this_entry = [
+          name,
+          $scope.getAttr(name, "role"),
+          $scope.getAttr(name, "skills"),
+          $scope.getAttr(name, "joined"),
+        ];
+        ourdata.push(this_entry);
+      });
+      console.log(ourdata);
+      new Handsontable(document.getElementById("emp-info"), {
+        data: ourdata,
+        rowHeaders: true,
+        colHeaders: true,
+        licenseKey: "non-commercial-and-evaluation",
+      });
+      // END: Describing An Handsontable
     })
     .catch(function () {
       console.log("Wasn't Able to Get values");

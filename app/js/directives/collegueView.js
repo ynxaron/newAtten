@@ -7,7 +7,6 @@ angular.module("newAtten").directive("collegueView", function () {
     template: `
       <div class="col position-relative z-2">
         <div class="d-flex align-items-center p-4">
-          <!-- Use div instead of button to avoid invalid nesting -->
           <button
             class="btn btn-white border-white"
             role="button"
@@ -55,6 +54,7 @@ angular.module("newAtten").directive("collegueView", function () {
                 ng-attr-id="button-overview-{{props.index}}"
               >
                 <div>
+                  <!--Here For Future Use, when we would add button functionalities from here-->
                   <a ng-attr-id="button-{{props.index}}-envelope"><i class="fas fa-envelope"></i></a>
                 </div>
                 <div>
@@ -87,7 +87,7 @@ angular.module("newAtten").directive("collegueView", function () {
       </div>
     `,
     link: function (scope) {
-      console.log("Loaded Info: " + scope.getCollegueInfo);
+      console.log("Loaded Info: " + scope.props);
     },
   };
 });

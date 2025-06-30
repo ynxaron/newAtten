@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <!-- Sidebar -->
+        <!-- BEGIN: Sidebar -->
         <div
             class="sidebar d-flex flex-column position-fixed bg-white p-3"
             id="sidebar"
@@ -16,7 +16,7 @@
                 <small class="fw-bold">Since 1972</small>
             </div>
 
-            <nav class="nav flex-column">
+            <nav class="nav d-flex flex-column">
                 <a
                     id="checkin-btn"
                     class="nav-link px-3 py-2 rounded text-white mb-2"
@@ -75,8 +75,8 @@
                 <small>Developer</small>
             </div>
         </div>
-        <!-- Sidebar-->
-        <!-- Main Dashboard -->
+        <!-- END: Sidebar-->
+        <!-- BEGIN: Main Dashboard -->
         <div class="col p-4" style="margin-left: 260px">
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -243,7 +243,7 @@
             <div class="row border shadow-lg p-4 m-1 mb-4 rounded">
                 <!-- Profile Section -->
                 <div
-                    class="col-12 col-md-6 d-flex flex-column flex-md-row align-items-center mb-4"
+                    class="col-md-6 d-flex flex-column flex-md-row align-items-center mb-4"
                 >
                     <img
                         ng-src="{{profileImgSrc}}"
@@ -283,7 +283,7 @@
             >
                 <h1 class="mt-5 ms-3 fw-bold">Your Team</h1>
                 <div
-                    class="row row-cols-1 row-cols-md-2 g-4 position-relative"
+                    class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-4 position-relative"
                     id="teamOverview"
                 >
                     <collegue-view
@@ -297,7 +297,7 @@
 
             <div class="mt-5 mb-4 chart-box shadow">
                 <h4><strong>Heat Map</strong></h4>
-                <div class="calendar" id="work-hours-calendar">
+                <div class="row g-1 calendar" id="work-hours-calendar">
                     <day-box
                         ng-repeat="dayInfo in dayInfoArr"
                         props="dayInfo"
