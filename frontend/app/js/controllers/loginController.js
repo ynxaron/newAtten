@@ -1,4 +1,4 @@
-newAtten.controller("loginController", function ($scope, pictures) {
+newAtten.controller("loginController", function ($scope, $http, pictures) {
   localStorage.setItem("loggedIn", "false");
   localStorage.setItem("adminLoggedIn", "false");
   $scope.loginPic = pictures.loginPic();
@@ -6,14 +6,24 @@ newAtten.controller("loginController", function ($scope, pictures) {
     const useremail = $scope.useremail;
     const password = $scope.password;
 
-    if (useremail === "satyam.prakash@djubo.com" && password == "1234") {
-      localStorage.setItem("loggedIn", true);
-      window.location.href = "#!/dashboard";
-    } else if (useremail == "admin@djubo.com" && password == "1234") {
-      localStorage.setItem("adminLoggedIn", "true");
-      window.location.href = "#!/admin";
-    } else {
-      showText("Wrong Username or Password", "#825995");
-    }
+    $http.post("http://localhost:8000/employee/login/", {
+      "email": "satyam.prakash@djubo.com",
+      "password": "1234"
+    }).then(function(response) {
+      console.log(response.data)
+      if (response.data.is_admin) {
+        console.log("IS ADMIN")
+        localStorage.setItem("adminLoggedIn", "true");
+        window.location.href = "#!/admin"
+      }
+      else if (response.data.is_user) {
+        console.log("LOGGED IN")
+        localStorage.setItem("loggedIn", "true");
+        window.location.href = "#!/dashboard";
+      } else {
+        console.log("NOT ALLOWED")
+        showText("Wrong Username or Password. Please Try Again")
+      }
+    })
   };
 });

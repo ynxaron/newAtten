@@ -1,5 +1,6 @@
 let newAtten = angular.module("newAtten", ["ngRoute"]);
-newAtten.config(function ($routeProvider) {
+newAtten.config(function ($routeProvider, $httpProvider) {
+  $httpProvider.defaults.withCredentials = true;
   $routeProvider
     .when("/", {
       templateUrl: "app/partial/login.html",
