@@ -17,10 +17,11 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
   // END: Defining charts so that they can be updated via ng-change
 
   jsons
-    .emp_info()
+    .adminViews()
     .then(function (data) {
       console.log("We Got The Employee Value");
-      $scope.employeeNames = data.map((person) => person.name);
+      $scope.empData = data.data;
+      $scope.employeeNames = Object.keys(data.data);
       console.log("Data Found");
 
       // BEGIN: Defining This Fuction
@@ -28,13 +29,14 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
       // employee, and the other the attribute you want from them. For example, if you want
       // img_src from employee "Satyam Prakash", then you say give("img_src", "Satyam Prakash")
       $scope.getAttr = function (name, attr) {
-        let person = data.find((person) => person.name == name);
+        let person = $scope.empData[name];
         if (person && person.hasOwnProperty(attr)) {
           return person[attr];
         }
-        console.log(
-          "The attr: " + attr + " for name " + name + " was not found",
+        console.error(
+          "The attr '" + attr + "' for name '" + name + "' was not found",
         );
+        return null;
       };
       // END: Of the function that would let us dynamically use each attr
 
@@ -135,7 +137,7 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
             datasets: [
               {
                 label: "HOURS",
-                data: $scope.getAttr($scope.nameChoosen, "metrics")["months"],
+                data: $scope.getAttr($scope.nameChoosen, "hours_by_month"),
                 backgroundColor: "rgba(124, 86, 247, 0.2)",
                 borderColor: "rgba(124, 86, 247, 1)",
                 tension: 0.3,
@@ -153,9 +155,7 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
       // BEGIN: A function that would select that person which has the name matching from selected
 
       $scope.selectPerson = function () {
-        $scope.personChoosen = data.find(
-          (person) => person.name == $scope.nameChoosen,
-        );
+        $scope.personChoosen = $scope.empData[$scope.nameChoosen];
 
         // Destroy previous charts if they exist
         if ($scope.hoursChart) $scope.hoursChart.destroy();
@@ -263,7 +263,7 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
               datasets: [
                 {
                   label: "HOURS",
-                  data: $scope.getAttr($scope.nameChoosen, "metrics")["months"],
+                  data: $scope.getAttr($scope.nameChoosen, "hours_by_month"),
                   backgroundColor: "rgba(124, 86, 247, 0.2)",
                   borderColor: "rgba(124, 86, 247, 1)",
                   tension: 0.3,
@@ -281,18 +281,19 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
       // END: A function that would select that person which has the name matching from selected
       //
       // BEGIN: Describing An Handsontable using the value from jsons.emp_info()
-      let ourdata = [["Name", "Role", "Skills", "Joined", "Hours"]];
+      let ourdata = [["Name", "Job", "Skills", "Joined", "Hours"]];
       _.each($scope.employeeNames, function (name) {
         // Here we would take the average working hour of the person throughout the month
-        let months = $scope.getAttr(name, "metrics")["months"];
+        let months = $scope.getAttr(name, "hours_by_month");
         let months_sum = months.reduce((a, b) => a + b);
+        // Making avg 0 is there is no length, otherwise taking the average
         let months_avg = (
           months.length ? months_sum / months.length : 0
         ).toFixed(1);
 
         let this_entry = [
           name,
-          $scope.getAttr(name, "role"),
+          $scope.getAttr(name, "job"),
           $scope.getAttr(name, "skills"),
           $scope.getAttr(name, "joined"),
           months_avg,

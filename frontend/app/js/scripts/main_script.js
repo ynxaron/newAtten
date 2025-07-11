@@ -37,13 +37,21 @@ function setupDashboardUI(chartsInfo) {
   let features_ticked = $("#Feature-Ticked");
   let code_evaluation = $("#Code-Evaluation");
 
+  console.warn("The type of", chartsInfo.codeReviews + " is " + typeof (chartsInfo.codeReviews));
+  console.warn("The type of", chartsInfo.featuresTicked + " is " + typeof (chartsInfo.featuresTicked));
+  console.warn("The type of", chartsInfo.codeEvaluation + " is " + typeof (chartsInfo.codeEvaluation));
+  console.warn("The type of" + chartsInfo.hours_by_day + " is " + typeof (chartsInfo.hours_by_day));
+  console.warn("The type of" + chartsInfo.hours_by_week + " is " + typeof (chartsInfo.hours_by_week));
+  console.warn("The type of" + chartsInfo.hours_by_month + " is " + typeof (chartsInfo.hours_by_month));
+  console.warn("The type of" + chartsInfo.hours_by_years + " is " + typeof (chartsInfo.hours_by_years));
+
   new Chart(hours_metric, {
     type: "doughnut",
     data: {
       labels: ["Hours Logged", "Expected"],
       datasets: [
         {
-          data: chartsInfo.hours_logged,
+          data: chartsInfo.codeReviews,
           backgroundColor: ["#825995", "#e0e0e0"],
           borderWidth: 0,
         },
@@ -73,7 +81,7 @@ function setupDashboardUI(chartsInfo) {
       labels: ["Tickets Achieved", "Remaining"],
       datasets: [
         {
-          data: chartsInfo.tickets_archived,
+          data: chartsInfo.featuresTicked,
           backgroundColor: ["#4ca3af", "#e0e0e0"],
           borderWidth: 0,
         },
@@ -103,7 +111,7 @@ function setupDashboardUI(chartsInfo) {
       labels: ["Code Reviews", "Remaining"],
       datasets: [
         {
-          data: chartsInfo.code_evaluated,
+          data: chartsInfo.codeEvaluation,
           backgroundColor: ["#825995", "#e0e0e0"],
           borderWidth: 0,
         },
@@ -137,7 +145,7 @@ function setupDashboardUI(chartsInfo) {
   $("#box-container").on("mouseenter", () => {
     $(this).css({ "background-color": "black", color: "white" });
   });
-  // Changing The Colots When Hovered: End
+  // Changing The Colors When Hovered: End
 
   // END: CALENDAR VIEW
 
@@ -149,7 +157,7 @@ function setupDashboardUI(chartsInfo) {
       datasets: [
         {
           label: "HOURS",
-          data: chartsInfo.week_work_info,
+          data: chartsInfo.hours_by_day,
           backgroundColor: "rgba(124, 86, 247, 0.7)",
         },
       ],
@@ -170,7 +178,7 @@ function setupDashboardUI(chartsInfo) {
       datasets: [
         {
           label: "HOURS",
-          data: chartsInfo.month_work_info,
+          data: chartsInfo.hours_by_month,
           backgroundColor: "rgba(124, 86, 247, 0.2)",
           borderColor: "rgba(124, 86, 247, 1)",
           tension: 0.3,
@@ -187,7 +195,7 @@ function setupDashboardUI(chartsInfo) {
   // END: MONTH WORK VIEW
   // BEGIN: Defining the Year Week Chart
 
-  let data = chartsInfo.years_work_info;
+  let data = chartsInfo.hours_by_years;
   new Chart($("#HoursByYears"), {
     type: "line",
     data: {

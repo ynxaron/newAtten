@@ -7,8 +7,8 @@ newAtten.controller("loginController", function ($scope, $http, pictures) {
     const password = $scope.password;
 
     $http.post("http://localhost:8000/employee/login/", {
-      "email": "satyam.prakash@djubo.com",
-      "password": "1234"
+      "email": useremail,
+      "password": password,
     }).then(function(response) {
       console.log(response.data)
       if (response.data.is_admin) {

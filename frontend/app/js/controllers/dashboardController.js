@@ -13,7 +13,9 @@ newAtten.controller(
     $scope.firstName = "DB ERROR";
 
     // Load image paths
-    $scope.profileImgSrc = pictures.imgSrc("Satyam Prakash");
+    pictures.imgSrc().then(function(image) {
+      $scope.profileImgSrc = image;
+    })
     $scope.djuboImgSrc = pictures.djuboImg();
 
     // Load JSON data (returns promises now)
@@ -31,7 +33,7 @@ newAtten.controller(
       .thisuser_data()
       .then((response) => {
         $scope.weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        $scope.dayInfoArr = _.map(response.work_hours, function (hours, index) {
+        $scope.dayInfoArr = _.map(response.hours_by_day, function (hours, index) {
           return {
             hours: hours,
             dayNum: index + 1,
@@ -66,14 +68,6 @@ newAtten.controller(
             : "fas fa-circle me-3 text-secondary",
         };
       });
-    });
-
-    jsons.onlines().then((data) => {
-      $scope.onlines = data;
-    });
-
-    jsons.user_session().then((data) => {
-      $scope.user_session = data;
     });
 
     // Time and Greeting
