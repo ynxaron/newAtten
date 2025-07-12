@@ -9,13 +9,6 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
   $scope.employeeNames = [];
   $scope.nameChoosen = "Satyam Prakash";
 
-  // BEGIN: Defining charts so that they can be updated via ng-change
-  $scope.hoursChart = null;
-  $scope.featureChart = null;
-  $scope.codeChart = null;
-  $scope.lineChart = null;
-  // END: Defining charts so that they can be updated via ng-change
-
   jsons
     .adminViews()
     .then(function (data) {
@@ -163,13 +156,15 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
         if ($scope.codeChart) $scope.codeChart.destroy();
         if ($scope.lineChart) $scope.lineChart.destroy();
 
+        console.log(`CodeReviews: ${$scope.personChoosen.codeReviews}`);
+        // Recreating The Charts
         $scope.hoursChart = new Chart(document.getElementById("Hours-Metric"), {
           type: "doughnut",
           data: {
             labels: ["Hours Logged", "Expected"],
             datasets: [
               {
-                data: $scope.personChoosen.codeReviews,
+                data: $scope.getAttr($scope.nameChoosen, 'codeReviews'),
                 backgroundColor: ["#825995", "#e0e0e0"],
                 borderWidth: 0,
               },

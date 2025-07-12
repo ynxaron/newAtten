@@ -1,5 +1,5 @@
+// Getting and Storing Images From Backend server
 newAtten.service("pictures", function ($http) {
-  let BASE_URL = "assets";
   let URL = "http://localhost:8000";
   this.imgSrc = function() {
       return $http.get(`${URL}/employee/getpic`).then(function(response) {
@@ -27,10 +27,52 @@ newAtten.service("pictures", function ($http) {
       })
     }
 
-  this.djuboImg = function () {
-    return `${BASE_URL}/djubo-cropped.png`;
-  };
-  this.loginPic = function () {
-    return `${BASE_URL}/login-pic.jpeg`;
-  };
+
+  this.loginPic = function() {
+    return $http.get(`${URL}/employee/getDefaultPic`).then(function(res) {
+      try {
+        sessionStorage.setItem("loginPic", res.data['image']);
+      } catch (e) {
+        console.warn("Failed to Cache LoginPic...");
+      }
+      return res.data['image'];
+    }, function(err) {
+      console.warn(`Failed to retrieve DefaultPic, trying sessionStorage...\n${err}`);
+      try {
+        const defaultPic = sessionStorage.getItem("loginPic");
+        if (defaultPic !== null) {
+          return defaultPic;
+        } else {
+          console.error("loginPic in sessionStorage but is null...returning null");
+          return null;
+        }
+      } catch (e) {
+        console.error(`Failed to Retrieve from sessionStorage...${e}`);
+      }
+    })
+  }
+
+  this.djuboImg = function() {
+      return $http.get(`${URL}/employee/getDjuboImg`).then(function(res) {
+        try {
+          sessionStorage.setItem("djuboPic", res.data['image']);
+        } catch (e) {
+          console.warn("Failed to Cache djuboPic...");
+        }
+        return res.data['image'];
+      }, function(err) {
+        console.warn(`Failed to retrieve djuboPic, trying sessionStorage...\n${err}`);
+        try {
+          const defaultPic = sessionStorage.getItem("djuboPic");
+          if (defaultPic !== null) {
+            return defaultPic;
+          } else {
+            console.error("djuboPic in sessionStorage but is null...returning null");
+            return null;
+          }
+        } catch (e) {
+          console.error(`Failed to Retrieve from sessionStorage...${e}`);
+        }
+      })
+    }
 });

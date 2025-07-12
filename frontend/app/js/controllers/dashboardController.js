@@ -1,6 +1,6 @@
 newAtten.controller(
   "dashboardController",
-  function ($scope, $interval, $timeout, pictures, jsons, $log) {
+  function ($scope, $interval, $timeout, pictures, jsons, $log, $http) {
     if (localStorage.getItem("loggedIn") === "false") {
       window.location.href = "/frontend/#!";
       return;
@@ -16,7 +16,10 @@ newAtten.controller(
     pictures.imgSrc().then(function(image) {
       $scope.profileImgSrc = image;
     })
-    $scope.djuboImgSrc = pictures.djuboImg();
+    pictures.djuboImg().then(function(img) {
+      $scope.djuboImgSrc = img;
+    })
+
 
     // Load JSON data (returns promises now)
     jsons.user_info().then((response) => {
@@ -111,8 +114,15 @@ newAtten.controller(
     };
 
     $scope.logOut = () => {
-      localStorage.setItem("loggedIn", false);
-      window.location.href = "/";
+      $http.post(`${URL}/employee/logout`, {}).then(function(res){
+        console.log(res.data);
+      }).catch(function(err){
+        console.error(res.data);
+      }).finally(function() {
+        sessionStorage.clear();
+        localStorage.setItem("loggedIn", "false");
+        window.location.href = "!#/";
+      })
     };
   },
 );
