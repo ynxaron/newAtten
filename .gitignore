@@ -1,0 +1,13 @@
+*.pyc
+__pycache__/
+*.sqlite3
+*.log
+.env
+venv/
+.newAtten-venv/
+staticfiles/
+media/
+db.sqlite3
+*.db
+.DS_Store
+
