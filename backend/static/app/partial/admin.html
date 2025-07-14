@@ -1,0 +1,91 @@
+<div class="container-fluid py-4 px-3">
+    <!-- Employee Selector -->
+    <div class="mb-4">
+        <div
+            class="p-3 bg-white shadow-sm rounded-4 border-start border-4"
+            style="border-color: #bfa3d3"
+        >
+            <label for="nameSelect" class="form-label fw-semibold fs-5 mb-2">
+                Select Employee
+            </label>
+            <select
+                class="form-select border-2 rounded-pill px-4 py-2 shadow-sm"
+                style="
+                    background-color: #fdfcff;
+                    font-weight: 500;
+                    color: #5a4e65;
+                "
+                ng-change="selectPerson()"
+                ng-model="nameChoosen"
+                ng-options="name for name in employeeNames"
+            ></select>
+        </div>
+    </div>
+
+    <!-- Profile and Metrics Section -->
+    <div class="row border rounded-4 shadow-lg bg-white p-4 mb-4">
+        <!-- Profile Info -->
+        <div
+            class="col-12 col-md-6 d-flex flex-column flex-md-row align-items-center mb-4"
+        >
+            <img
+                ng-src="{{getAttr(nameChoosen, 'image')}}"
+                class="img-fluid rounded-circle shadow"
+                style="
+                    max-width: 180px;
+                    height: auto;
+                    border: 4px solid #dee2e6;
+                "
+            />
+            <div class="ms-md-4 mt-4 mt-md-0 text-center text-md-start">
+                <p class="display-6 fw-bold mb-2 text-dark">{{nameChoosen}}</p>
+                <p class="h4 fw-semibold text-secondary mb-2">
+                    {{getAttr(nameChoosen, 'job')}}
+                </p>
+                <p class="h5 text-muted mb-2">
+                    {{getAttr(nameChoosen, 'skills')}}
+                </p>
+                <p class="h6 mt-3 text-dark">
+                    Joined
+                    <strong class="fw-bold"
+                        >{{getAttr(nameChoosen, 'joined')}}</strong
+                    >
+                </p>
+            </div>
+        </div>
+
+        <!-- Donut Charts -->
+        <div class="col-12 col-md-2 mb-4 mb-md-0 text-center">
+            <canvas
+                id="Hours-Metric"
+                style="width: 100%; max-height: 200px"
+            ></canvas>
+        </div>
+        <div class="col-12 col-md-2 mb-4 mb-md-0 text-center">
+            <canvas
+                id="Feature-Ticked"
+                style="width: 100%; max-height: 200px"
+            ></canvas>
+        </div>
+        <div class="col-12 col-md-2 text-center">
+            <canvas
+                id="Code-Evaluation"
+                style="width: 100%; max-height: 200px"
+            ></canvas>
+        </div>
+    </div>
+
+    <!-- Line Chart -->
+    <div class="row bg-white shadow-lg rounded-4 p-4 mx-2">
+        <div class="col-12">
+            <canvas
+                id="workinghours-graph"
+                style="width: 100%; max-height: 400px"
+            ></canvas>
+        </div>
+    </div>
+    <!--HandsonTable Table-->
+    <div class="d-flex justify-content-center">
+        <div class="shadow-lg bg-white pl-5" id="emp-info"></div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="container-fluid p-0 m-0">
+    <!-- Main Settings Panel -->
+    <div class="col p-4 ms-3">
+        <h3 class="fw-bold mb-4 h1">Profile Settings</h3>
+
+        <div class="row g-4">
+            <!-- Profile Settings -->
+            <div class="col-md-6">
+                <div class="stat-box text-start">
+                    <h5 class="mb-3">Profile Settings</h5>
+                    <form>
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label"
+                                >Full Name</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="fullName"
+                                value="Satyam Prakash"
+                                ng-model="fullName"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label"
+                                >Email address</label
+                            >
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                value="satyam.prakash@djubo.com"
+                                ng-model="useremail"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="job" class="form-label">Job</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="role"
+                                value="Backend Developer"
+                                ng-model="job"
+                            />
+                        </div>
+                        <button
+                            class="btn text-white"
+                            style="background-color: #825995"
+                            ng-click="updateProfile()"
+                        >
+                            Update Profile
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Password Settings -->
+            <div class="col-md-6">
+                <div class="stat-box text-start">
+                    <h5 class="mb-3">Change Password</h5>
+                    <form ng-submit="updatePassword()" novalidate>
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label"
+                                >Current Password</label
+                            >
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="currentPassword"
+                                ng-model="currentPassword"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label"
+                                >New Password</label
+                            >
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="newPassword"
+                                ng-model="newPassword"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label"
+                                >Confirm New Password</label
+                            >
+                            <input
+                                type="password"
+                                class="form-control"
+                                ng-model="newPasswordAgain"
+                            />
+                        </div>
+                        <button
+                            type="submit"
+                            class="btn"
+                            style="background-color: #825995; color: white"
+                        >
+                            Update Password
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
