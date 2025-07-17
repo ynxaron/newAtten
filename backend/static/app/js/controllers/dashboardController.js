@@ -13,10 +13,10 @@ newAtten.controller(
     $scope.firstName = "DB ERROR";
 
     // Load image paths
-    pictures.imgSrc().then(function(image) {
+    pictures.imgSrc().then(function (image) {
       $scope.profileImgSrc = image;
     })
-    pictures.djuboImg().then(function(img) {
+    pictures.djuboImg().then(function (img) {
       $scope.djuboImgSrc = img;
     })
 
@@ -31,24 +31,6 @@ newAtten.controller(
       $scope.paid_overtime = response.paid_overtime;
       $scope.total_absent = response.total_absent;
     });
-    // Defining A Custom Function that would call the backend to update breaks as well as try to cache the values
-    const updateBreaks = function(breaksInfo) {
-      return $http.post(`${URL}/employee/updateBreak`, breaksInfo).then((res) => {
-        if (res.status !== 200) {
-          console.error("Error Happened While Sending\n" + res.data.error);
-          return;
-        }
-        console.log("Got the Value, trying to cache it in...");
-        try {
-          localStorage.setItem(`breakInfo-${moment().format("HH:mm")}`, breaksInfo);
-        } catch (e) {
-          console.warn(`Error Happened While trying to cache...\n${e}`);
-        }
-      }).catch((err) => {
-        console.error(`Error Happened While Fetching updateBreaks endpoint...tring localStorage\n${err.data['error']}`);
-      })
-    }
-
 
     jsons
       .thisuser_data()
@@ -67,8 +49,7 @@ newAtten.controller(
             setupDashboardUI(response);
           }
           if (typeof sidebarUI === "function") {
-            const breaksInfo = sidebarUI();
-            updateBreaks(breaksInfo);
+            sidebarUI();
           };
         });
       })
@@ -94,7 +75,7 @@ newAtten.controller(
       });
     });
 
-        // Time and Greeting
+    // Time and Greeting
     $interval(() => {
       $scope.currentTime = moment().format("HH:mm");
       $scope.greeting = () => {
@@ -135,14 +116,17 @@ newAtten.controller(
     };
 
     $scope.logOut = () => {
-      $http.post(`${URL}/employee/logout`, {}).then(function(res){
+      $http.post(`http://localhost:8000/employee/logout`, {}).then(function (res) {
+        if (res.status !== 200) {
+          console.error("Something Went Wrong...Wasn't Able to Log You Out");
+        }
         console.log(res.data);
         sessionStorage.clear();
         localStorage.setItem("loggedIn", "false");
         window.location.href = "#!/";
-      }).catch(function(err){
-        console.error(err.data);
+      }).catch(function (err) {
+        console.error(`Some Error Happened While Loggin Out: ${err.data['error']}`);
       })
     };
-  },
+  }
 );

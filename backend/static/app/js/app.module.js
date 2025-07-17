@@ -20,5 +20,9 @@ newAtten.config(function ($routeProvider, $httpProvider) {
     .when("/setting", {
       templateUrl: "/static/app/partial/settings.html",
       controller: "settingsController",
+    })
+    .when("/applyLeave", {
+      templateUrl: "/static/app/partial/applyLeave.html",
+      controller: "applyLeaveController",
     });
 });

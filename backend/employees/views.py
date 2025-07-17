@@ -1,4 +1,3 @@
-from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 
@@ -17,13 +16,13 @@ from employees.services.logout import logoutdb
 from employees.services.updateProfile import updateProfiledb
 from employees.services.updatePassword import updatePassworddb
 from employees.services.updateBreak import updateBreakdb
+from employees.services.applyLeave import applyLeavedb
 
 
 # Logic For Handling Logins
 @csrf_exempt
 def login(request):
     return dblogin(request)
-
 
 # Creating A Default Check View Here
 def home(request):
@@ -75,3 +74,7 @@ def updatePassword(request):
 @csrf_exempt
 def updateBreak(request):
     return updateBreakdb(request)
+
+@csrf_exempt
+def applyLeave(request):
+    return applyLeavedb(request)

@@ -16,5 +16,6 @@ urlpatterns = [
     path("logout", views.logout),
     path("updateProfile", views.updateProfile),
     path("updatePassword", views.updatePassword),
-    path("updateBreak", views.updateBreak)
+    path("updateBreak", views.updateBreak),
+    path("applyLeave", views.applyLeave),
 ]

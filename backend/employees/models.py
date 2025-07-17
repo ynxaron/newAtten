@@ -43,3 +43,4 @@ class EmployeeInfo(models.Model):
     checkin_time = models.JSONField()
     break_time = models.JSONField()
     checkout_time = models.JSONField()
+    applied_for_leave = models.CharField(max_length=50, blank=True, null=True, help_text="Example: `06-12->06-15;Emergency Hospital Visit` or null")

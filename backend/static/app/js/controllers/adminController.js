@@ -1,7 +1,7 @@
 newAtten.controller("adminController", function ($scope, $http, jsons) {
   // Checking if you can login or not (via predefined localStorage)
   if (localStorage.getItem("adminLoggedIn") === "false") {
-    window.location.href = "/frontend/#!";
+    window.location.href = "#!/";
     return;
   }
   // First of all, we collect all the names in an employeeNames (needed for dropdown)

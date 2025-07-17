@@ -1,0 +1,40 @@
+
+<div class="container-fluid bg-light min-vh-100 d-flex align-items-center">
+  <div class="container p-5 rounded shadow bg-white" style="max-width: 600px;">
+
+    <h1 class="mb-4 text-center text-primary">Pick Your Leave Dates</h1>
+
+    <div class="mb-3">
+      <label for="leaveBegin" class="form-label h5">When Would Your Leave Begin:</label>
+      <input
+        type="text" class="form-control"
+        id="leaveBegin" placeholder="Leave Begin"
+        ng-model="leaveBeginDate"
+      >
+    </div>
+
+    <div class="mb-3">
+      <label for="leaveEnd" class="form-label h5">When Would Your Leave End:</label>
+      <input
+        type="text" class="form-control"
+        id="leaveEnd" placeholder="Leave End"
+        ng-model="leaveEndDate"
+      >
+    </div>
+
+    <div class="mb-3">
+      <label for="reasonForLeave" class="form-label h5">Reason to Apply for Leave:</label>
+      <input
+        type="text" class="form-control"
+        id="reasonForLeave" placeholder="Reason To Leave"
+        ng-model="reason"
+      >
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-warning px-4 py-2 mt-3" ng-click="submitLeave()">
+        Apply For Leave
+      </button>
+    </div>
+  </div>
+</div>

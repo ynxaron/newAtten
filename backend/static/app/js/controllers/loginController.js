@@ -13,7 +13,6 @@ newAtten.controller("loginController", function ($scope, $http, pictures) {
       "email": useremail,
       "password": password,
     }).then(function(response) {
-      console.log(response.data)
       if (response.data.is_admin) {
         console.log("IS ADMIN")
         localStorage.setItem("adminLoggedIn", "true");

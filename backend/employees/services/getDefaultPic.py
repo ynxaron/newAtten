@@ -10,9 +10,6 @@ def getDefaultPicdb(request):
     if request.method != "GET":
         return JsonResponse({"error": "The Request MUST be GET"}, status=405)
 
-    if not request.user.is_authenticated:
-        return JsonResponse({"error": "You Must be logged in"}, status=401)
-
     image_path = os.path.join(settings.BASE_DIR, 'assets', 'login-pic.jpeg')
     try:
         with open(image_path, "rb") as imgRaw:

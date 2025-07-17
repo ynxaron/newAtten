@@ -1,10 +1,11 @@
 from django.http.response import JsonResponse
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 @csrf_exempt
 def updateBreakdb(request):
-    if request.method != "GET":
+    if request.method != "POST":
         return JsonResponse({"error": "The Request Method must be GET"}, status=405)
 
     user = request.user
@@ -13,7 +14,7 @@ def updateBreakdb(request):
 
     thisemp = request.user.employee
     try:
-        data = request.data
+        data = json.loads(request.body)
         checkInTime = data['checkInTime']
         checkOutTime = data['checkOutTime']
         breaks = data['breaks']

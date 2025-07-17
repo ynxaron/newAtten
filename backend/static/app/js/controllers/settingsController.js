@@ -1,8 +1,7 @@
-console.log("settingsController, Running....");
 newAtten.controller("settingsController", function ($http, $scope) {
   const URL = "http://localhost:8000";
   if (localStorage.getItem("loggedIn") === "false") {
-    window.location.href = "#!"
+    window.location.href = "#!";
   }
 
   $scope.updateProfile = function () {

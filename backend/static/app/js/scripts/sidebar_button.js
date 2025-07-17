@@ -77,7 +77,6 @@ function sidebarUI() {
   let checkedIn = false;
   let checkedOut = true;
   // End of Variables Declration
-  let breaksArray = [];
   $("#checkin-btn").click(function () {
     if (checkedIn) {
       showText("You Have Already Checked In!");
@@ -125,8 +124,8 @@ function sidebarUI() {
       console.log("RESUMED @" + moment().format("HH:mm"));
     } else if ($("#break-btn strong").text() == "RESUME") {
       break_begin = moment().format("HH:mm");
-      showText("BREAK @" + moment());
-      console.log("BREAK @" + moment());
+      showText("BREAK @" + break_begin);
+      console.log("BREAK @" + break_begin);
     }
   });
   // END: Defining the response to button pressing
@@ -148,12 +147,27 @@ function sidebarUI() {
     checkedOut = true;
     checkoutTime = moment().format("HH:mm");
 
-    showText("YOU CHECKOUT OUT! ENJOY REST OF YOUR DAY");
+    const dayInfo = {
+      checkInTime: checkinTime,
+      checkOutTime: checkoutTime,
+      breaks: break_array
+    };
+    console.warn(`checkInTime: ${checkinTime}`);
+    console.warn(`checkOutTime: ${checkoutTime}`);
+    console.warn(`breaks: ${break_array}`);
+    $.ajax({
+      url: "http://localhost:8000/employee/updateBreak",
+      type: "POST",
+      data: JSON.stringify(dayInfo),
+      success: function (res) {
+        showText("The Day Info have been updated");
+        console.log(`The DayInfo Was Updated: ${res['message']}`);
+      },
+      error: function (err) {
+        showText("There Was an Error In Updating...");
+        console.error(`There Was an Error in Updating...${err['error']}`);
+      } });
+
+    setTimeout(() => { showText("You Logged Out!! Enjoy Your Day!") }, 1000);
   });
-  // END: Making it so that checkin and checkout time is stored
-  return {
-    "checkInTime": checkinTime,
-    "checkOutTime": checkoutTime,
-    "breaks": break_array
-  }
 }
