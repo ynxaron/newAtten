@@ -8,6 +8,9 @@ An Attendance Tracker Build with Django, AngularJS, JQuery and Django.
 
 ![Overview](./.readme/newAttenOverview.png)
 
+## Login 
+![login](./.readme/login.png)
+
 ## Dashboard 
 
 ![dashboard](./.readme/dashboard1.png)
