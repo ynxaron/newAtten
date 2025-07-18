@@ -47,6 +47,8 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
         },
 
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               labels: {
@@ -77,6 +79,8 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
           },
 
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
               legend: {
                 labels: {
@@ -106,6 +110,8 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
         },
 
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               labels: {
@@ -139,6 +145,8 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
             ],
           },
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: { legend: { display: false } },
             scales: { y: { beginAtZero: true } },
           },
@@ -172,6 +180,8 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
           },
 
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
               legend: {
                 labels: {
@@ -202,6 +212,8 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
             },
 
             options: {
+              responsive: true,
+              maintainAspectRatio: false,
               plugins: {
                 legend: {
                   labels: {
@@ -233,6 +245,8 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
             },
 
             options: {
+              responsive: true,
+              maintainAspectRatio: false,
               plugins: {
                 legend: {
                   labels: {
@@ -267,6 +281,8 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
               ],
             },
             options: {
+              responsive: true,
+              maintainAspectRation: true,
               plugins: { legend: { display: false } },
               scales: { y: { beginAtZero: true } },
             },
@@ -300,6 +316,9 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
         data: ourdata,
         rowHeaders: true,
         colHeaders: true,
+        width: '100%',
+        height: 'auto',
+        stretchH: 'all',
         licenseKey: "non-commercial-and-evaluation",
       });
       // END: Describing An Handsontable
