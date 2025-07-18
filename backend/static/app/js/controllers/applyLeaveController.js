@@ -1,4 +1,4 @@
-newAtten.controller("applyLeaveController", function ($scope, $http) {
+newAtten.controller("applyLeaveController", function ($scope, $http, pictures) {
   if (localStorage.getItem("loggedIn") === "false") {
     window.location.href = "#!";
   }
@@ -19,6 +19,11 @@ newAtten.controller("applyLeaveController", function ($scope, $http) {
     showButtonPanel: true
   });
 
+  pictures.djuboImg().then((img) => {
+    $scope.djuboIcon = img;
+  }).catch((err) => {
+    console.error(`Wasn't Able To Get Djubo Icon\n${err}`);
+  });
   $scope.submitLeave = function () {
     if (!($scope.leaveBeginDate && $scope.leaveEndDate && $scope.reason)) {
       showText("Pick The Dates Before Proceeding");

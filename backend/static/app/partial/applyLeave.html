@@ -1,10 +1,18 @@
 <div class="container-fluid bg-light min-vh-100 d-flex align-items-center">
   <div class="container p-5 rounded shadow bg-white" style="max-width: 600px;">
 
-    <p class="h1 mb-4 text-center tw-bold" style="color:#825995">Pick Your Leave Dates</p>
+      <div class="text-center">
+          <img
+              ng-src="{{djuboIcon}}"
+              alt="DJUBO Logo"
+              style="max-width: 100%; max-height: 85px"
+          />
+      </div>
+      <p class="h1 mb-4 text-center tw-bold" style="color:#825995">Pick Your Leave Dates</p>
+    <hr>
 
-    <div class="mb-3">
-      <label for="leaveBegin" class="form-label h5">When Would Your Leave Begin:</label>
+    <div class="mb-3 pt-5">
+      <label for="leaveBegin" class="form-label h5">Date Begin</label>
       <input
         type="text" class="form-control"
         id="leaveBegin" placeholder="Leave Begin"
@@ -13,7 +21,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="leaveEnd" class="form-label h5">When Would Your Leave End:</label>
+      <label for="leaveEnd" class="form-label h5">Date End</label>
       <input
         type="text" class="form-control"
         id="leaveEnd" placeholder="Leave End"
@@ -22,7 +30,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="reasonForLeave" class="form-label h5">Reason to Apply for Leave:</label>
+      <label for="reasonForLeave" class="form-label h5">Reason</label>
       <input
         type="text" class="form-control"
         id="reasonForLeave" placeholder="Reason To Leave"

@@ -20,6 +20,10 @@ newAtten.controller(
       $scope.djuboImgSrc = img;
     })
 
+    $scope.openLeave = function() {
+      window.location.href = "#!/applyLeave";
+    }
+
 
     // Load JSON data (returns promises now)
     jsons.user_info().then((response) => {
