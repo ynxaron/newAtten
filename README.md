@@ -27,3 +27,13 @@ An Attendance Tracker Build with Django, AngularJS, JQuery and Django.
 ## Apply Leave 
 ![applyLeave](./.readme/leave.png)
 
+
+# How To Use It 
+
+```bash 
+git clone https://github.com/ynxaron/newAtten
+cd newAtten 
+pip install -r .missl/requirements.txt
+cd code
+python manage.py runserver
+```
