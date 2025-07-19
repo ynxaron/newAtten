@@ -5,12 +5,12 @@ newAtten.service("jsons", function ($http, $q) {
   const getThis = function(attr) {
     return $http.get(`${URL}/employee/get/${attr}`).then(function(response) {
       try {
-        localStorage.setItem(attr, JSON.stringify(response.data[attr]))
+        localStorage.setItem(attr, JSON.stringify(response.data.attr))
       } catch {
         console.error("Could Not Cache In LocalStorage: ", attr)
       }
     // returning the attribute as is configured the response.
-      return response.data[attr];
+      return response.data.attr;
   }, function(error) {
       console.warn("Failed to retrieve value, trying local storage...");
       try {
