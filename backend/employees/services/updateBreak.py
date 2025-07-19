@@ -27,6 +27,10 @@ def updateBreakdb(request):
 
     currentDate = datetime.datetime.now().date()
 
+    print("BACKEND: Check In Time: " + str(checkInTime) + " Type = " + str(type(checkInTime)))
+    print("BACKEND: Check Out Time: " + str(checkOutTime) + " Type = " + str(type(checkOutTime)))
+    print("BACKEND: Breaks: " + str(breaks) + " Type = " + str(type(breaks)))
+
     # Defining a normalyzing function that would take time in raw string, and create TimeField()
     def normalize_time(time):
         try:
@@ -34,11 +38,11 @@ def updateBreakdb(request):
         except:
             return JsonResponse({"error": "Invalid Time Formating"}, status=400)
 
-        return datetime.time(hour=hour, minute=minute)
+        return datetime.time(hour=int(hour), minute=int(minute))
 
     # Checking If There already exists for currentDate an entry
     if EmpStats.objects.filter(employee=thisemp, date=currentDate).exists():
-        return JsonResponse({"Internal Server Error, You Have Already Logged In..."}, status=500)
+        return JsonResponse({"Internal Server Error, Make Sure You Have Not Already Checked Out"}, status=500)
 
     thisempstats = EmpStats.objects.create(
         employee=thisemp,
@@ -46,15 +50,13 @@ def updateBreakdb(request):
         checkin_time=normalize_time(checkInTime),
         checkout_time=normalize_time(checkOutTime))
 
-    # Checking If break can be broken apart into break begin time and break end time
-    try:
-        [begin_break_time, end_break_time] = breaks;
-    except:
-        return JsonResponse({"error": "Incorrectly Formatted Break"}, status=400)
 
-    EmpBreak.objects.create(
-        empstats=thisempstats,
-        date=currentDate,
-        begin_time=normalize_time(begin_break_time),
-        end_time=normalize_time(end_break_time)
-    )
+    for thisbreak in breaks:
+        EmpBreak.objects.create(
+            empstats=thisempstats,
+            date=currentDate,
+            begin_time=normalize_time(thisbreak[0]),
+            end_time=normalize_time(thisbreak[1])
+        )
+
+    return JsonResponse({"message": "Breaks Updated Succesfully!"}, status=200)

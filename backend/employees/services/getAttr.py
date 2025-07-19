@@ -14,9 +14,6 @@ def getAttrdb(request, attr):
     thisemp = request.user.employee
 
     if attr.startswith('hours_by'):
-        if not hasattr(thisemp, attr):
-            return JsonResponse({"error": "This Employee Does Not Have Requested Attribrute"}, status=400)
-
         requested_attr = None;
         if attr == "hours_by_day":
             requested_attr = list(thisemp.empinfo.hour_by_day.values_list('info', flat=True))

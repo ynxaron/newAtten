@@ -117,8 +117,8 @@ function sidebarUI() {
     if ($("#break-btn strong").text() == "BREAK") {
       // Updating Breaks
       break_end = moment().format("HH:mm");
-      break_array.push(break_begin);
-      break_array.push(break_end);
+      break_array.push([break_begin, break_end]);
+      console.log(break_array);
       // Showing Text
       showText("RESUMED @" + moment().format("HH:mm"));
       console.log("RESUMED @" + moment().format("HH:mm"));
@@ -147,6 +147,9 @@ function sidebarUI() {
     checkedOut = true;
     checkoutTime = moment().format("HH:mm");
 
+    console.log(`FRONTEND: Check In Time: ${checkinTime}`);
+    console.log(`FRONTEND: Check Out Time: ${checkoutTime}`);
+    console.log(`FRONTEND: Breaks: ${break_array}`);
     const dayInfo = {
       checkInTime: checkinTime,
       checkOutTime: checkoutTime,
@@ -164,10 +167,11 @@ function sidebarUI() {
         console.log(`The DayInfo Was Updated: ${res['message']}`);
       },
       error: function (err) {
-        showText("There Was an Error In Updating...");
+        showText("There Was an Error In Updating...Make Sure You Have Not Already Checked Out");
         console.error(`There Was an Error in Updating...${err['error']}`);
       } });
 
+    break_array = [];
     setTimeout(() => { showText("You Logged Out!! Enjoy Your Day!") }, 1000);
   });
 }
