@@ -13,6 +13,6 @@ def allNamesdb(request):
         )
 
     usernames = list(
-        User.objects.exclude(username="admin").values_list("username", flat=True)
+        User.objects.exclude(username__in=["admin", "ynx"]).values_list("username", flat=True)
     )
     return JsonResponse(usernames, safe=False)

@@ -61,7 +61,7 @@ def adminViewdb(request):
             "job": emp.job,
             "skills": emp.skills,
             "joined": emp.joined,
-            "hours_by_month": emp.hours_by_month,
+            "hours_by_month": list(emp.empinfo.hour_by_month.values_list('info', flat=True))
         };
 
         # Setting the value of dictionary

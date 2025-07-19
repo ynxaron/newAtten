@@ -15,17 +15,15 @@ An Attendance Tracker Build with Django, AngularJS, JQuery and Django.
 
 ![dashboard](./.readme/dashboard1.png)
 
-![dashboard](./.readme/dashboard3.png)
-
-![dashboard](./.readme/dashboard4.png)
+![dashboard](./.readme/dashboard2.png)
 
 ## Settings 
 
 ![settings](./.readme/settings.png)
 
 ## Admin
-![admin](./.readme/admin1.png)
+![admin](./.readme/admin.png)
 
 ## Apply Leave 
-![applyLeave](./.readme/applyLeave.png)
+![applyLeave](./.readme/leave.png)
 
