@@ -26,6 +26,9 @@ class Employee(models.Model):
     # CUSTOMS
     latest_commit = models.CharField(max_length=250)
 
+    def __str__(self):
+        return f"{self.username}"
+
 ##########################################
 # Defining Break Information
 class EmpStats(models.Model):
@@ -34,32 +37,55 @@ class EmpStats(models.Model):
     checkin_time = models.TimeField()
     checkout_time = models.TimeField()
 
+    def __str__(self):
+        return f"{self.employee.username} on {self.date}"
+
 class EmpBreak(models.Model):
     empstats = models.ForeignKey(EmpStats, on_delete=models.CASCADE, related_name='empbreak')
     date = models.DateField()
     begin_time = models.TimeField()
     end_time = models.TimeField()
 
+    def __str__(self):
+        return f"{self.empstats.employee.username}'s break on {self.begin_time} to {self.end_time} on {self.date}"
+
 ###########################################
 # Employee Charts Info
 class EmpInfo(models.Model):
     employee = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name="empinfo")
 
+    def __str__(self):
+        return f"{self.employee.username} EmpInfo"
+
 class HourByDay(models.Model):
     empinfo = models.ForeignKey(EmpInfo, on_delete=models.CASCADE, related_name="hour_by_day")
     info = models.FloatField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.empinfo.employee.username} Hours By Day Value"
 
 class HourByWeek(models.Model):
     empinfo = models.ForeignKey(EmpInfo, on_delete=models.CASCADE, related_name="hour_by_week")
     info = models.FloatField(blank=True, null=True)
 
+    def __str__(self):
+        return f"{self.empinfo.employee.username} Hours By Week Value"
+
+
 class HourByMonth(models.Model):
     empinfo = models.ForeignKey(EmpInfo, on_delete=models.CASCADE, related_name="hour_by_month")
     info = models.FloatField(blank=True, null=True)
 
+    def __str__(self):
+        return f"{self.empinfo.employee.username} Hours By Month Value"
+
+
 class HourByYear(models.Model):
     empinfo = models.ForeignKey(EmpInfo, on_delete=models.CASCADE, related_name="hour_by_year")
     info = models.FloatField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.empinfo.employee.username} Hours By Years Valuel"
 
 ###################### Admin View #########################
 ############[ This Is The Admin View Model ]###############
