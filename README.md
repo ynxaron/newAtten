@@ -27,10 +27,6 @@ An Attendance Tracker Build with Django, AngularJS, JQuery and Django.
 ## Apply Leave
 ![applyLeave](./.readme/leave.png)
 
-## Dummy
-![dummyImage](/some/dummy)
-
-
 # How To Use It
 
 ```bash
