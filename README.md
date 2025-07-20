@@ -21,8 +21,8 @@ An Attendance Tracker Build with Django, AngularJS, JQuery and Django.
 
 ![settings](./.readme/settings.png)
 
-## Dummy Image
-![dummyImage](./.readme/dummy.png)
+## Admin
+![admin](./.readme/admin.png)
 
 # How To Use It (Copy The Code In Your Terminal)
 
