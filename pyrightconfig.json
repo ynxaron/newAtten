@@ -1,0 +1,7 @@
+
+{
+  "typeCheckingMode": "basic",
+  "exclude": ["venv", "__pycache__", ".git", "migrations"],
+  "reportMissingImports": false,
+  "reportUnusedImport": false
+}
