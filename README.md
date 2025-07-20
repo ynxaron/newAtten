@@ -8,31 +8,34 @@ An Attendance Tracker Build with Django, AngularJS, JQuery and Django.
 
 ![Overview](./.readme/newAttenOverview.png)
 
-## Login 
+## Login
 ![login](./.readme/login.png)
 
-## Dashboard 
+## Dashboard
 
 ![dashboard](./.readme/dashboard1.png)
 
 ![dashboard](./.readme/dashboard2.png)
 
-## Settings 
+## Settings
 
 ![settings](./.readme/settings.png)
 
 ## Admin
 ![admin](./.readme/admin.png)
 
-## Apply Leave 
+## Apply Leave
 ![applyLeave](./.readme/leave.png)
 
+## Dummy
+![dummyImage](/some/dummy)
 
-# How To Use It 
 
-```bash 
+# How To Use It
+
+```bash
 git clone https://github.com/ynxaron/newAtten
-cd newAtten 
+cd newAtten
 pip install -r .missl/requirements.txt
 cd code
 python manage.py runserver
