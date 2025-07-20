@@ -24,11 +24,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'assets')
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", "your-dev-fallback-key")
+SECRET_KEY = 'django-insecure-k13w*u@*5cc_#yrv6r_)k3&bk!c+tvs33-y5kre%_1_*9+1d_3'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False") == "True"
-
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com"]
+DEBUG = True
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 # Application definition
 

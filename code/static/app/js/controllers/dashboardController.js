@@ -29,6 +29,8 @@ newAtten.controller(
     jsons.user_info().then((response) => {
       $scope.userName = response.username;
       $scope.userJob = response.userjob;
+      $scope.skills = response.skills;
+      $scope.joined = response.joined;
       $scope.firstName = $scope.userName.split(" ")[0];
       $scope.total_leaves_taken = response.total_leaves_taken;
       $scope.total_leaves_left = response.total_leaves_left;

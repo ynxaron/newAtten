@@ -83,6 +83,8 @@ newAtten.service("jsons", function ($http, $q) {
     return $q.all({
       username: getThis("username"),
       userjob: getThis("job"),
+      skills: getThis("skills"),
+      joined: getThis("joined"),
       total_leaves_taken: getThis("total_leaves_taken"),
       total_leaves_left: getThis("total_leaves_left"),
       paid_overtime: getThis("paid_overtime"),

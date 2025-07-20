@@ -158,17 +158,23 @@ function sidebarUI() {
     console.warn(`checkInTime: ${checkinTime}`);
     console.warn(`checkOutTime: ${checkoutTime}`);
     console.warn(`breaks: ${break_array}`);
+
+    const token = sessionStorage.getItem("jwtToken");
     $.ajax({
       url: "http://localhost:8000/employee/updateBreak",
       type: "POST",
       data: JSON.stringify(dayInfo),
+      headers: {
+          "Authorization": `Bearer ${token}`
+      },
+      contentType: "application/json",
       success: function (res) {
         showText("The Day Info have been updated");
-        console.log(`The DayInfo Was Updated: ${res['message']}`);
+        console.log(`The DayInfo Was Updated: ${res.message}`);
       },
       error: function (err) {
         showText("There Was an Error In Updating...Make Sure You Have Not Already Checked Out");
-        console.error(`There Was an Error in Updating...${err['error']}`);
+        console.error(`There Was an Error in Updating...${JSON.stringify(err)}`);
       } });
 
     break_array = [];
