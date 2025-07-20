@@ -1,4 +1,3 @@
-from django.views import View
 from employees.models import EmployeeInfo
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -19,7 +18,7 @@ def toggleLeavedb(request, name, toaccept):
     try:
         thisemployeeinfo = EmployeeInfo.objects.get(username=name)
     except Exception as e:
-        return JsonResponse({"error": "Cannot Find The Name, Make Sure It Exists"}, status=400)
+        return JsonResponse({"error": "Cannot Find The Name, Make Sure It Exists\n" + str(e)}, status=400)
 
 
     if toaccept == "ACCEPT":
@@ -28,9 +27,11 @@ def toggleLeavedb(request, name, toaccept):
         else:
             thisemployeeinfo.leave_accepted = True
             return JsonResponse({"message": "Leave Accepted"}, status=200)
-    else:
+    elif toaccept == "DENY":
         if not thisemployeeinfo.leave_accepted:
             return JsonResponse({"message": "Leave Denied Already"}, status=200)
         else:
             thisemployeeinfo.leave_accepted = False
             return JsonResponse({"message": "Leave Denied"}, status=200)
+    else:
+        return JsonResponse({"error": "Append Your Request with /ACCEPT or /DENY"}, status=400)
