@@ -13,18 +13,23 @@ newAtten.controller("loginController", function ($scope, $http, pictures) {
       "email": useremail,
       "password": password,
     }).then(function(response) {
-      if (response.data.is_admin) {
-        console.log("IS ADMIN")
-        localStorage.setItem("adminLoggedIn", "true");
-        window.location.href = "#!/admin"
-      }
-      else if (response.data.is_user) {
-        console.log("LOGGED IN")
-        localStorage.setItem("loggedIn", "true");
-        window.location.href = "#!/dashboard";
+      if (response.data.token) {
+        sessionStorage.setItem("jwtToken", response.data.token);
+        if (response.data.is_admin) {
+          localStorage.setItem("adminLoggedIn", "true");
+          window.location.href = "#!/admin"
+        }
+        else if (response.data.is_user) {
+          localStorage.setItem("loggedIn", "true");
+          window.location.href = "#!/dashboard";
+        } else {
+          console.error("Error While Logging...");
+          showText("Wrong Username or Password. Please Try Again")
+        }
       } else {
-        console.error("Error While Logging...");
-        showText("Wrong Username or Password. Please Try Again")
+        console.log("Login Failed: No Token recieved");
+        showText("Login failed. Please check your email and password");
+        sessionStorage.removeItem("jwtToken");
       }
     }).catch(function(err) {
       console.error(`Error Loggin In\n${err.data}`)

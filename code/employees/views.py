@@ -17,6 +17,7 @@ from employees.services.updateProfile import updateProfiledb
 from employees.services.updatePassword import updatePassworddb
 from employees.services.updateBreak import updateBreakdb
 from employees.services.applyLeave import applyLeavedb
+from employees.services.leaveStatus import toggleLeavedb
 
 
 # Logic For Handling Logins
@@ -78,3 +79,7 @@ def updateBreak(request):
 @csrf_exempt
 def applyLeave(request):
     return applyLeavedb(request)
+
+@csrf_exempt
+def toggleLeave(request, name, toaccept):
+    return toggleLeavedb(request, name, toaccept)

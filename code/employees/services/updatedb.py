@@ -5,10 +5,11 @@ from django.core.files.base import ContentFile
 import json
 import base64
 import traceback
-
+from employees.utils import token_required
 from employees.models import Employee, EmployeeInfo
 
 @csrf_exempt
+@token_required
 def updatedb(request):
 
     print("  -->UPDATEDB HIT!")

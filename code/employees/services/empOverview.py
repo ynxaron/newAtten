@@ -1,7 +1,9 @@
 import base64
 from employees.models import Employee
 from django.http import JsonResponse
+from employees.utils import token_required
 
+@token_required
 def empOverviewdb(request, name):
     if request.method != "GET":
         return JsonResponse({"error": "Only GET Method Allowed"}, status=405)

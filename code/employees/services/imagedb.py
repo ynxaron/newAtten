@@ -1,7 +1,9 @@
 import base64
 from django.http.response import JsonResponse
 from employees.models import Employee
+from employees.utils import token_required
 
+@token_required
 def imagedb(request, name):
     if request.method != 'GET':
         return JsonResponse({"error": "Only GET Method Allowed"}, status=405)

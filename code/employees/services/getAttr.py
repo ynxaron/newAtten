@@ -1,5 +1,7 @@
 from django.http import JsonResponse
+from employees.utils import token_required
 
+@token_required
 def getAttrdb(request, attr):
     if request.method != "GET":
         return JsonResponse({"error": "The Request Must be GET"}, status=405)

@@ -1,7 +1,9 @@
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from employees.utils import token_required
 
+@token_required
 @csrf_exempt
 def applyLeavedb(request):
     if request.method != "POST":

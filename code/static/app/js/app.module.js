@@ -1,6 +1,7 @@
 let newAtten = angular.module("newAtten", ["ngRoute"]);
 newAtten.config(function ($routeProvider, $httpProvider) {
   $httpProvider.defaults.withCredentials = true;
+  $httpProvider.interceptors.push("authInterceptor");
   $routeProvider
     .when("/", {
       templateUrl: "/static/app/partial/login.html",
@@ -25,4 +26,17 @@ newAtten.config(function ($routeProvider, $httpProvider) {
       templateUrl: "/static/app/partial/applyLeave.html",
       controller: "applyLeaveController",
     });
+});
+
+
+newAtten.factory("authInterceptor", function() {
+  return {
+    request: function(config) {
+      const token = sessionStorage.getItem("jwtToken");
+      if (token) {
+        config.headers["Authorization"] = "Bearer " + token;
+      }
+      return config;
+    }
+  };
 });

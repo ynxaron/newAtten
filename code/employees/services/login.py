@@ -1,7 +1,10 @@
+import jwt
+import datetime
 from django.http.response import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 import json
 
 @csrf_exempt
@@ -26,8 +29,16 @@ def dblogin(request):
     user = authenticate(request, username=thisuser.username, password=userpassword)
     if user is not None:
         login(request, user)
-        print("USER IS LOGGED IN")
-        print("SESSION KEY: " + str(request.session.session_key))
-        return JsonResponse({"message": "LOGIN SUCCESFULL!", "is_admin": user.is_staff, "is_user": True}, status=200)
+        payload = {
+            'id': user.id,
+            'username': user.username,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1),
+            'iat': datetime.datetime.utcnow()
+        }
+
+        token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
+        if isinstance(token, bytes):
+            token = token.decode('utf-8')
+        return JsonResponse({"message": "LOGIN SUCCESFULL!", "is_admin": user.is_staff, "is_user": True, "token": token}, status=200)
 
     return JsonResponse({"error": "WRONG PASSWORD"}, status=401)

@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from employees.utils import token_required
 
 
+@token_required
 def allNamesdb(request):
     if request.method != "GET":
         return JsonResponse({"error": "Only GET allowed"}, status=405)

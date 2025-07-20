@@ -3,14 +3,16 @@
     so that our frontend can access it to generate /admin view
 """
 from django.http.response import JsonResponse
-from employees.models import Employee
+from employees.models import Employee, EmployeeInfo
 import base64
 import logging
 from django.conf import settings
 import os
+from employees.utils import token_required
 
 logger = logging.getLogger(__name__)
 
+@token_required
 def adminViewdb(request):
     # Ensuring Method is GET
     if request.method != "GET":
@@ -51,6 +53,18 @@ def adminViewdb(request):
                 logger.error("Failed To Fall On DEFAULT IMAGE...\n" + str(e))
             return JsonResponse({"error": "Wasn't Able to Encode Image. Error: " + str(err)}, status=500)
 
+        # Declaring EmployeeInfo Model Instance For `applied_to_leave` value
+        try:
+            employeeinfo = EmployeeInfo.objects.get(username=empName)
+        except Exception as e:
+            return JsonResponse(
+                {"error":
+                "Wasn't Able to Get EmployeeInfo object for applied_for_leave\n" + str(e)}, status=500)
+
+        if employeeinfo.applied_for_leave:
+            appliedForLeave = employeeinfo.applied_for_leave
+        else:
+            appliedForLeave = "NOT DEFINED"
         # Creating the dictionary
         thisEmpInfo = {
             "name": emp.username,
@@ -61,7 +75,8 @@ def adminViewdb(request):
             "job": emp.job,
             "skills": emp.skills,
             "joined": emp.joined,
-            "hours_by_month": list(emp.empinfo.hour_by_month.values_list('info', flat=True))
+            "hours_by_month": list(emp.empinfo.hour_by_month.values_list('info', flat=True)),
+            "applied_for_leave": appliedForLeave
         };
 
         # Setting the value of dictionary

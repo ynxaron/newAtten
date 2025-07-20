@@ -6,8 +6,10 @@ from django.views.decorators.csrf import csrf_exempt
 from employees.models import EmpBreak, EmpStats
 import json
 import datetime
+from employees.utils import token_required
 
 @csrf_exempt
+@token_required
 def updateBreakdb(request):
     if request.method != "POST":
         return JsonResponse({"error": "The Request Method must be GET"}, status=405)

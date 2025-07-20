@@ -1,7 +1,9 @@
 from django.http.response import JsonResponse
 from employees.models import Employee
 import base64
+from employees.utils import token_required
 
+@token_required
 def allEmpValue(request):
     if request.method != "GET":
         return JsonResponse({"error": "Only GET Methods Alloed"}, status=401)

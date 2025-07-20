@@ -9,13 +9,29 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
   $scope.employeeNames = [];
   $scope.nameChoosen = "Satyam Prakash";
 
+  $scope.acceptLeave = function() {
+    return $http.post(`http://localhost:8000/employee/toggleLeave/${$scope.nameChoosen}/ACCEPT`).then((res) => {
+      console.log(`Leave Succesfully Accepted: ${res.data.message}`);
+      showText("Leave Toggled");
+    }).catch((err) => {
+      console.error(`There was an error\n${err.data.error}`);
+    })
+  }
+
+  $scope.denyLeave = function() {
+      return $http.post(`http://localhost:8000/employee/toggleLeave/${$scope.nameChoosen}/DENY`).then((res) => {
+        console.log(`Leave Succesfully Denied: ${res.data.message}`);
+        showText("Leave Toggled");
+      }).catch((err) => {
+        console.error(`There was an error\n${err.data.error}`);
+      })
+    }
+
   jsons
     .adminViews()
     .then(function (data) {
-      console.log("We Got The Employee Value");
       $scope.empData = data.data;
       $scope.employeeNames = Object.keys(data.data);
-      console.log("Data Found");
 
       // BEGIN: Defining This Fuction
       // Then we would define a function that would take two values, one is the name of the
@@ -32,6 +48,17 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
         return null;
       };
       // END: Of the function that would let us dynamically use each attr
+
+      // BEGIN: Describing The Text For Applied For Leave
+      let appliedForLeave = $("#appliedForLeave");
+      $scope.appliedDate = $scope.getAttr($scope.nameChoosen, 'applied_for_leave');
+      console.log(`Applied For Leave Data For ${$scope.nameChoosen} Is ${$scope.appliedDate}`);
+      if ($scope.appliedDate == "NOT DEFINED") {
+        appliedForLeave.html(`<strong>NOT APPLIED</strong>`);
+      } else {
+        appliedForLeave.html(`APPLIED FOR <strong>${$scope.appliedDate}</strong>`);
+      }
+      // END: Describing The Text For Applied For Leave
 
       $scope.hoursChart = new Chart(document.getElementById("Hours-Metric"), {
         type: "doughnut",
@@ -163,6 +190,17 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
         if ($scope.featureChart) $scope.featureChart.destroy();
         if ($scope.codeChart) $scope.codeChart.destroy();
         if ($scope.lineChart) $scope.lineChart.destroy();
+
+        // BEGIN: DESCRIBING DATE MECHANICS
+        appliedForLeave = $("#appliedForLeave");
+        $scope.appliedDate = $scope.personChoosen.applied_for_leave;
+        console.log(`Applied For Leave Data For ${$scope.nameChoosen} Is ${$scope.appliedDate}`);
+        if ($scope.appliedDate == "NOT DEFINED") {
+          appliedForLeave.html('<strong>NOT APPLIED</strong>')
+        } else {
+          appliedForLeave.html(`APPLIED FOR <strong>${$scope.appliedDate}</strong>`);
+        }
+        // END: DESCRIBING DATE MECHANICS
 
         console.log(`CodeReviews: ${$scope.personChoosen.codeReviews}`);
         // Recreating The Charts
@@ -311,7 +349,6 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
         ];
         ourdata.push(this_entry);
       });
-      console.log(ourdata);
       new Handsontable(document.getElementById("emp-info"), {
         data: ourdata,
         rowHeaders: true,

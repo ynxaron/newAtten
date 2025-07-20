@@ -51,6 +51,19 @@
                         >{{getAttr(nameChoosen, 'joined')}}</strong
                     >
                 </p>
+                <div class="d-flex justify-content-between">
+                    <p class="h6 mt-3 text-dark tw-bold" id="appliedForLeave">
+                    </p>
+                    <p>
+                        <button class="btn mt-2" title="Toggle Leave" ng-click="acceptLeave()">
+                            <i class="fas fa-user-check"></i>
+                        </button>
+
+                        <button class="btn mt-2" title="Toggle Leave" ng-click="denyLeave()">
+                            <i class="fas fa-ban"></i>
+                        </button>
+                    </p>
+                </div>
             </div>
         </div>
 

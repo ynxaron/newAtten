@@ -1,8 +1,10 @@
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from employees.utils import token_required
 
 @csrf_exempt
+@token_required
 def updatePassworddb(request):
     if request.method != "POST":
         return JsonResponse({"error": "ONLY POST METHOD ALLOWED FOR AUTH"}, status=405)

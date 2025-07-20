@@ -2,9 +2,11 @@ from employees.models import Employee
 from django.http.response import JsonResponse
 import base64
 import logging
+from employees.utils import token_required
 
 logger = logging.getLogger(__name__)
 
+@token_required
 def getPicdb(request):
     if request.method != "GET":
         return JsonResponse({"error": "The Request Must be GET"}, status=405)

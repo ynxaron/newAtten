@@ -126,6 +126,11 @@ newAtten.controller(
         }
         console.log(res.data);
         sessionStorage.clear();
+        localStorage.clear();
+
+        document.cookie = "sessionid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+        document.cookie = "csrftoken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+
         localStorage.setItem("loggedIn", "false");
         window.location.href = "#!/";
       }).catch(function (err) {
