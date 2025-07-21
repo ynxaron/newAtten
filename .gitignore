@@ -3,7 +3,6 @@ __pycache__/
 *.log
 .env
 venv/
-.newAtten-venv/
 staticfiles/
 media/
 .DS_Store
