@@ -160,6 +160,9 @@ function sidebarUI() {
     console.warn(`breaks: ${break_array}`);
 
     const token = sessionStorage.getItem("jwtToken");
+    if (token === null) {
+      console.error("Wasn't Able to retrive jwtToken for sidebar sending auth");
+    }
     $.ajax({
       url: "http://localhost:8000/employee/updateBreak",
       type: "POST",
@@ -178,6 +181,6 @@ function sidebarUI() {
       } });
 
     break_array = [];
-    setTimeout(() => { showText("You Logged Out!! Enjoy Your Day!") }, 1000);
+    setTimeout(() => { showText("You Logged Out!! Enjoy Your Day!") }, 1200);
   });
 }

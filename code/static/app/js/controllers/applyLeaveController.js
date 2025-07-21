@@ -26,7 +26,7 @@ newAtten.controller("applyLeaveController", function ($scope, $http, pictures) {
   });
   $scope.submitLeave = function () {
     if (!($scope.leaveBeginDate && $scope.leaveEndDate && $scope.reason)) {
-      showText("Pick The Dates Before Proceeding");
+      showText("Fill Each Entry Before Sending Request...");
       return;
     }
 
