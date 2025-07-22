@@ -16,6 +16,10 @@ class Employee(models.Model):
     skills = models.CharField(max_length=400)
     job = models.CharField(max_length=300)
     joined = models.DateField()
+    # Charts
+    codeReviews = models.JSONField(null=True)
+    featuresTicked = models.JSONField(null=True)
+    codeEvaluation = models.JSONField(null=True)
     # BASIC APP
     online = models.BooleanField(default=True)
     profile_img = models.ImageField(blank=True, null=True)
