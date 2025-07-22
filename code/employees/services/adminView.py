@@ -55,7 +55,8 @@ def adminViewdb(request):
 
         # Declaring EmployeeInfo Model Instance For `applied_to_leave` value
         try:
-            employeeinfo = EmployeeInfo.objects.get(id=empId)
+            empusername = Employee.objects.get(id=empId).user
+            employeeinfo = EmployeeInfo.objects.get(user=empusername)
         except Exception as e:
             return JsonResponse(
                 {"error":

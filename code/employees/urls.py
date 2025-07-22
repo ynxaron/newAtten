@@ -1,5 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from rest_framework.routers import DefaultRouter
+from employees.services.adminViewSet import AdminViewSet
+
+router = DefaultRouter()
+router.register("adminViewSet", AdminViewSet, basename="adminViewSet")
 
 urlpatterns = [
     path("", views.home),
@@ -11,6 +16,7 @@ urlpatterns = [
     path("allIds", views.allIds),
     path("getpic", views.getPic),
     path("adminView", views.adminView),
+    path("adminViewSet", AdminViewSet.as_view({"get": "list"})),
     path("getDefaultPic", views.getDefaultPic),
     path("getDjuboImg", views.djuboImg),
     path("logout", views.logout),
