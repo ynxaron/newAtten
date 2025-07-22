@@ -18,5 +18,5 @@ urlpatterns = [
     path("updatePassword", views.updatePassword),
     path("updateBreak", views.updateBreak),
     path("applyLeave", views.applyLeave),
-    path("toggleLeave/<str:name>/<str:toaccept>", views.toggleLeave)
+    path("toggleLeave/<int:userid>/<str:toaccept>", views.toggleLeave)
 ]

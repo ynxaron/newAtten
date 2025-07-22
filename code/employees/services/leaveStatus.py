@@ -3,7 +3,7 @@ from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-def toggleLeavedb(request, name, toaccept):
+def toggleLeavedb(request, userid, toaccept):
     if request.method != "POST":
         return JsonResponse({"error": "The Request Must be POST"}, status=405)
 
@@ -16,7 +16,7 @@ def toggleLeavedb(request, name, toaccept):
         return JsonResponse({"error": "Unauthorized Access. Login First as Admin"}, status=401)
 
     try:
-        thisemployeeinfo = EmployeeInfo.objects.get(username=name)
+        thisemployeeinfo = EmployeeInfo.objects.get(id=userid)
     except Exception as e:
         return JsonResponse({"error": "Cannot Find The Name, Make Sure It Exists\n" + str(e)}, status=400)
 

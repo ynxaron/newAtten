@@ -81,5 +81,5 @@ def applyLeave(request):
     return applyLeavedb(request)
 
 @csrf_exempt
-def toggleLeave(request, name, toaccept):
-    return toggleLeavedb(request, name, toaccept)
+def toggleLeave(request, userid, toaccept):
+    return toggleLeavedb(request, userid, toaccept)

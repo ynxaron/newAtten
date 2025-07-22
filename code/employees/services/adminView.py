@@ -67,6 +67,7 @@ def adminViewdb(request):
             appliedForLeave = "NOT DEFINED"
         # Creating the dictionary
         thisEmpInfo = {
+            "id": emp.id,
             "name": emp.username,
             "image": img,
             "codeReviews": emp.codeReviews,

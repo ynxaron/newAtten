@@ -9,29 +9,31 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
   $scope.employeeNames = [];
   $scope.nameChoosen = "Satyam Prakash";
 
-  $scope.acceptLeave = function() {
-    return $http.post(`http://localhost:8000/employee/toggleLeave/${$scope.nameChoosen}/ACCEPT`).then((res) => {
-      console.log(`Leave Succesfully Accepted: ${res.data.message}`);
-      showText("Leave Toggled");
-    }).catch((err) => {
-      console.error(`There was an error\n${err.data.error}`);
-    })
-  }
-
-  $scope.denyLeave = function() {
-      return $http.post(`http://localhost:8000/employee/toggleLeave/${$scope.nameChoosen}/DENY`).then((res) => {
-        console.log(`Leave Succesfully Denied: ${res.data.message}`);
-        showText("Leave Toggled");
-      }).catch((err) => {
-        console.error(`There was an error\n${err.data.error}`);
-      })
-    }
-
   jsons
     .adminViews()
     .then(function (data) {
       $scope.empData = data.data;
       $scope.employeeNames = Object.keys(data.data);
+
+      // Function To Accept Leaves
+      $scope.acceptLeave = function() {
+        return $http.post(`http://localhost:8000/employee/toggleLeave/${$scope.empData[$scope.nameChoosen].id}/ACCEPT`).then((res) => {
+          console.log(`Leave Succesfully Accepted: ${res.data.message}`);
+          showText("Leave Toggled");
+        }).catch((err) => {
+          console.error(`There was an error\n${err.data.error}`);
+        })
+      }
+
+      // Function To Deny Leaves
+      $scope.denyLeave = function() {
+        return $http.post(`http://localhost:8000/employee/toggleLeave/${$scope.empData[$scope.nameChoosen].id}/DENY`).then((res) => {
+          console.log(`Leave Succesfully Denied: ${res.data.message}`);
+          showText("Leave Toggled");
+        }).catch((err) => {
+          console.error(`There was an error\n${err.data.error}`);
+        })
+      }
 
       // BEGIN: Defining This Fuction
       // Then we would define a function that would take two values, one is the name of the
