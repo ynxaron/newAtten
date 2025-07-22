@@ -8,7 +8,7 @@ from employees.services.getAttr import getAttrdb
 from employees.services.empOverview import empOverviewdb
 from employees.services.adminView import adminViewdb
 from employees.services.imagedb import imagedb
-from employees.services.allNames import allNamesdb
+from employees.services.allIds import allIdsdb
 from employees.services.getPic import getPicdb
 from employees.services.getDefaultPic import getDefaultPicdb
 from employees.services.djuboImg import djuboImgdb
@@ -39,14 +39,14 @@ def getAttr(request, attr):
     print("   --> GET ATTR HIT: " + attr)
     return getAttrdb(request, attr)
 
-def empOverview(request, name):
-    return empOverviewdb(request, name)
+def empOverview(request, id):
+    return empOverviewdb(request, id)
 
 def image(request, name):
     return imagedb(request, name)
 
-def allnames(request):
-    return allNamesdb(request)
+def allIds(request):
+    return allIdsdb(request)
 
 def getPic(request):
     return getPicdb(request)

@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from employees.utils import token_required
 
 @token_required
-def empOverviewdb(request, name):
+def empOverviewdb(request, id):
     if request.method != "GET":
         return JsonResponse({"error": "Only GET Method Allowed"}, status=405)
 
@@ -16,9 +16,9 @@ def empOverviewdb(request, name):
         return JsonResponse({"error": "You Must NOT be Admin"}, status=403)
 
     try:
-       thisuser = Employee.objects.get(username=name)
+       thisuser = Employee.objects.get(id=id)
     except Employee.DoesNotExist:
-       return JsonResponse({"error": "Incorrect NameEncoding. Make Sure Your Name Is Like 'John%20Doe'"}, status=400)
+       return JsonResponse({"error": "Id Not Found"}, status=400)
 
     try:
       with open(thisuser.profile_img.path, 'rb') as img:

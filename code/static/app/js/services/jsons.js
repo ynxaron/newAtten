@@ -28,18 +28,18 @@ newAtten.service("jsons", function ($http, $q) {
    })
   }
 
-  const empInfo = function(name) {
-    return $http.get(`${URL}/employee/overview/${name}`).then(function(response) {
+  const empInfo = function(id) {
+    return $http.get(`${URL}/employee/overview/${id}`).then(function(response) {
      try {
-       sessionStorage.setItem(`overview_${name}`, JSON.stringify(response.data));
+       sessionStorage.setItem(`overview_${id}`, JSON.stringify(response.data));
      } catch {
-       console.warn("Couldn't able to cache empInfo for ", name);
+       console.warn("Couldn't able to cache empInfo for ", id);
      }
      return response.data;
     }, function(error) {
-      console.warn("Wasn't Able to retrieve value, trying sessionStorage...");
+      console.warn(`Wasn't Able to retrieve value\n${error,error}, trying sessionStorage...`);
       try {
-        let empCached = JSON.parse(sessionStorage.getItem(`overview_${name}`));
+        let empCached = JSON.parse(sessionStorage.getItem(`overview_${id}`));
         if (empCached !== null) {
           return empCached;
         } else {
@@ -54,10 +54,11 @@ newAtten.service("jsons", function ($http, $q) {
   }
 
     this.onlines = function() {
-      return $http.get(`${URL}/employee/allnames`).then(function(response) {
+      return $http.get(`${URL}/employee/allIds`).then(function(response) {
+        console.log(`All Ids are: ${response.data}`)
         let results = [];
-        for (let name of response.data) {
-          results.push(empInfo(name));
+        for (let id of response.data) {
+          results.push(empInfo(id));
         }
         return $q.all(results);
       }, function(error) {
