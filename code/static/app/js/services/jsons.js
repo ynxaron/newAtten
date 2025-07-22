@@ -37,7 +37,7 @@ newAtten.service("jsons", function ($http, $q) {
      }
      return response.data;
     }, function(error) {
-      console.warn(`Wasn't Able to retrieve value\n${error,error}, trying sessionStorage...`);
+      console.warn(`Wasn't Able to retrieve value\n${error.error}, trying sessionStorage...`);
       try {
         let empCached = JSON.parse(sessionStorage.getItem(`overview_${id}`));
         if (empCached !== null) {

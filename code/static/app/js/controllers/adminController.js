@@ -11,10 +11,12 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
 
   jsons
     .adminViews()
-    .then(function (data) {
-      $scope.empData = data.data;
-      $scope.employeeNames = Object.keys(data.data);
+    .then(function (result) {
+      $scope.empData = result.data;
+      $scope.employeeNames = Object.values(result.data).map((emp) => emp.name);
 
+      let nameToId = {};
+      Object.values(result.data).forEach((emp) => nameToId[emp.name] = emp.id);
       // Function To Accept Leaves
       $scope.acceptLeave = function() {
         return $http.post(`http://localhost:8000/employee/toggleLeave/${$scope.empData[$scope.nameChoosen].id}/ACCEPT`).then((res) => {
@@ -40,7 +42,14 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
       // employee, and the other the attribute you want from them. For example, if you want
       // img_src from employee "Satyam Prakash", then you say give("img_src", "Satyam Prakash")
       $scope.getAttr = function (name, attr) {
-        let person = $scope.empData[name];
+        let id;
+        if (!(name in nameToId)) {
+          console.error(`For Name ${name} There Exists No Id In DB`);
+          return;
+        } else {
+          id = nameToId[name];
+        }
+        let person = $scope.empData[id];
         if (person && person.hasOwnProperty(attr)) {
           return person[attr];
         }
@@ -185,7 +194,7 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
       // BEGIN: A function that would select that person which has the name matching from selected
 
       $scope.selectPerson = function () {
-        $scope.personChoosen = $scope.empData[$scope.nameChoosen];
+        $scope.personChoosen = $scope.empData[nameToId[$scope.nameChoosen]];
 
         // Destroy previous charts if they exist
         if ($scope.hoursChart) $scope.hoursChart.destroy();
@@ -362,7 +371,8 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
       });
       // END: Describing An Handsontable
     })
-    .catch(function () {
-      console.log("Wasn't Able to Get values");
+    .catch(function (err) {
+      console.log(`Wasn't Able to Get values\n${JSON.stringify(err)}`);
+      console.log("Status:", err.headers);
     });
 });

@@ -27,13 +27,13 @@ def adminViewdb(request):
         return JsonResponse({"error": "Unauthorized Access. Login First as Admin"}, status=401)
 
     # Getting all employee names
-    allNames = list(Employee.objects.values_list('username', flat=True))
+    allIds = list(Employee.objects.values_list('id', flat=True))
     empInfo = {} # This is what we would ultimately return, if everything goes well
-    for empName in allNames:
+    for empId in allIds:
         try:
-            emp = Employee.objects.get(username=empName)
+            emp = Employee.objects.get(id=empId)
         except Exception as e:
-            logger.error("Wasn't Able to GET User For Username `" + empName + "'\n" + str(e))
+            logger.error("Wasn't Able to GET User For Id `" + str(empId) + "'\n" + str(e))
             return JsonResponse({"error": "Cannot Find User in DATABASE"}, status=404)
 
         # Opening the image as encoded, then if it fails opening the fall back image as encoded
@@ -42,11 +42,11 @@ def adminViewdb(request):
                 img_encoded = base64.b64encode(img_raw.read()).decode("utf-8")
                 img = f"data:image/png;base64,{img_encoded}"
         except Exception as err:
-            logger.error("Wasn't Able to GET UserImage For USER '" + empName + "'\n" + str(err))
+            logger.error("Wasn't Able to GET UserImage For USER '" + str(empId) + "'\n" + str(err))
             image_path = os.path.join(settings.BASE_DIR, 'assets', 'login-pic.jpeg')
             try:
                 with open(image_path, "rb") as imgRaw:
-                    imgEncoded = base64.b64ecode(imgRaw.read()).decode("utf-8")
+                    imgEncoded = base64.b64encode(imgRaw.read()).decode("utf-8")
                     img = f"data:image/jpeg;base64,{imgEncoded}"
                     logger.error("Failed To GET User Image...Falling Back On DEFAULT IMAGE")
             except Exception as e:
@@ -55,7 +55,7 @@ def adminViewdb(request):
 
         # Declaring EmployeeInfo Model Instance For `applied_to_leave` value
         try:
-            employeeinfo = EmployeeInfo.objects.get(username=empName)
+            employeeinfo = EmployeeInfo.objects.get(id=empId)
         except Exception as e:
             return JsonResponse(
                 {"error":
@@ -81,6 +81,6 @@ def adminViewdb(request):
         };
 
         # Setting the value of dictionary
-        empInfo[empName] = thisEmpInfo
+        empInfo[str(empId)] = thisEmpInfo
 
     return JsonResponse(empInfo, status=200)
