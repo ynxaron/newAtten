@@ -17,6 +17,7 @@ class Employee(models.Model):
     job = models.CharField(max_length=300)
     joined = models.DateField()
     # Charts
+    # To Change to ForeignKey ManyToOne
     codeReviews = models.JSONField(null=True)
     featuresTicked = models.JSONField(null=True)
     codeEvaluation = models.JSONField(null=True)
@@ -51,6 +52,7 @@ class EmpBreak(models.Model):
 
 ###########################################
 # Employee Charts Info
+# With Unique = True, you can have OneToOne relation as well
 class EmpInfo(models.Model):
     employee = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name="empinfo")
 

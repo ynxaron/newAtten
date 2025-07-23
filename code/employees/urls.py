@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from employees.services.adminViewSet import AdminViewSet
 
 router = DefaultRouter()
-router.register("adminViewSet", AdminViewSet, basename="adminViewSet")
+router.register(r"adminViewSet", AdminViewSet, basename="adminViewSet")
 
 urlpatterns = [
     path("", views.home),
@@ -16,7 +16,6 @@ urlpatterns = [
     path("allIds", views.allIds),
     path("getpic", views.getPic),
     path("adminView", views.adminView),
-    path("adminViewSet", AdminViewSet.as_view({"get": "list"})),
     path("getDefaultPic", views.getDefaultPic),
     path("getDjuboImg", views.djuboImg),
     path("logout", views.logout),
@@ -24,5 +23,6 @@ urlpatterns = [
     path("updatePassword", views.updatePassword),
     path("updateBreak", views.updateBreak),
     path("applyLeave", views.applyLeave),
-    path("toggleLeave/<int:userid>/<str:toaccept>", views.toggleLeave)
+    path("toggleLeave/<int:userid>/<str:toaccept>", views.toggleLeave),
+    path("", include(router.urls)),
 ]

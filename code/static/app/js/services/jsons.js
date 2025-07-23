@@ -96,7 +96,7 @@ newAtten.service("jsons", function ($http, $q) {
   };
 
   this.adminViews = function() {
-    return $http.get(`${URL}/employee/adminViewSet`, function(response) {
+    return $http.get(`${URL}/employee/adminViewSet/`, function(response) {
       try {
         console.log("Got AdminView, trying to cache the data");
         localStorage.setItem("adminView", response.data);

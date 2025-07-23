@@ -13,10 +13,10 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
     .adminViews()
     .then(function (result) {
       $scope.empData = result.data;
-      $scope.employeeNames = Object.values(result.data).map((emp) => emp.name);
+      $scope.employeeNames = Object.values(result.data).map((emp) => emp.username);
 
       let nameToId = {};
-      Object.values(result.data).forEach((emp) => nameToId[emp.name] = emp.id);
+      Object.values(result.data).forEach((emp) => nameToId[emp.username] = emp.id);
       // Function To Accept Leaves
       $scope.acceptLeave = function() {
         return $http.post(`http://localhost:8000/employee/toggleLeave/${$scope.empData[$scope.nameChoosen].id}/ACCEPT`).then((res) => {
@@ -44,7 +44,7 @@ newAtten.controller("adminController", function ($scope, $http, jsons) {
       $scope.getAttr = function (name, attr) {
         let id;
         if (!(name in nameToId)) {
-          console.error(`For Name ${name} There Exists No Id In DB`);
+          console.error(`For Name '${name}' There Exists No Id In DB`);
           return;
         } else {
           id = nameToId[name];
