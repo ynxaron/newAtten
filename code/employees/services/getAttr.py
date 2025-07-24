@@ -37,6 +37,5 @@ def getAttrdb(request, attr):
     if not hasattr(thisemp, attr):
         return JsonResponse({"error": "This Employee Does Not Have Requested Attribrute"}, status=400)
 
-
     requested_attr = getattr(thisemp, attr)
     return JsonResponse({"attr": getattr(thisemp, attr)})
