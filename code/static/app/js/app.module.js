@@ -29,14 +29,18 @@ newAtten.config(function ($routeProvider, $httpProvider) {
 });
 
 
+// 'request' -> For Outgoing Requests
+// 'requestError' -> For Outgoing Requests In Case Of Failures
+// 'response' -> For Incoming Response
+// 'responseError' -> For Incoming Responses In Case Of Request
 newAtten.factory("authInterceptor", function() {
   return {
-    request: function(config) {
+    request: function(request) {
       const token = sessionStorage.getItem("jwtToken");
       if (token) {
-        config.headers["Authorization"] = "Bearer " + token;
+        request.headers["Authorization"] = "Bearer " + token;
       }
-      return config;
+      return request;
     }
   };
 });
