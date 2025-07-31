@@ -43,6 +43,7 @@ angular.module("newAtten").directive("collegueView", function () {
                     <i
                       class="{{props.onlineStatusIcon}}"
                       style="font-size: 0.75rem;"
+                      ng-attr-id="onlineStatus-{{props.id}}"
                     ></i>
                   </a>
                 </div>
@@ -86,8 +87,8 @@ angular.module("newAtten").directive("collegueView", function () {
         </div>
       </div>
     `,
-    link: function (scope) {
-      console.log("Loaded Info: " + scope.props);
-    },
-  };
+    link: function(scope) {
+      console.log(`${scope.props.name} Id = ${scope.props.id}`);
+    }
+  }
 });

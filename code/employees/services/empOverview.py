@@ -32,6 +32,7 @@ def empOverviewdb(request, id):
         return JsonResponse({"error": "Error Happened While Opening File\n\n" + str(e)}, status=500)
 
     employeeOverview = {
+        "id": thisuser.user.id,
         "photo": data_uri,
         "name": thisuser.username,
         "title": thisuser.job,

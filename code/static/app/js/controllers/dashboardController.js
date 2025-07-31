@@ -6,6 +6,42 @@ newAtten.controller(
       return;
     }
 
+    // Defining WebSocket Link For Online Status Change
+    $timeout(() => {
+      // Inside This Timeout we are Defining A Function That takes our user id
+      // (for identifying the particular user icon button), iconClass to add to,
+      // and a `retries` variable, which decremenet until it hits 0. We would try
+      // this same code `retry` amount of time, after which we would return with
+      // console.error
+      const updateStatus = function(userId, retries,iconClass) {
+        const collegue = document.getElementById(`onlineStatus-${userId}`);
+        if (!collegue) {
+          if (retries > 0) {
+            return updateStatus(userId, retries - 1, iconClass);
+          } else {
+            console.error(`After Several Retries, wasn't able to retrieve collegue with ${userId} user id`);
+            return;
+          }
+        }
+        console.log(`BEFORE: Collegue Icon Before Class Name: ${collegue.className}`);
+        collegue.className = iconClass;
+        console.log(`AFTER: Collegue Icon After Class Name: ${collegue.className}`);
+      }
+
+      const onlineStatusSocket = new WebSocket('ws://localhost:8000/ws/online/');
+      onlineStatusSocket.onmessage = function(event) {
+        $scope.$apply(() => {
+          const data = JSON.parse(event.data);
+          console.log(data);
+          const userId = data.user_id;
+          const iconClass = (data.status === "online")
+            ? "fas fa-circle me-3 text-success" :
+            "fas fa-circle me-3 text-secondary";
+
+          updateStatus(userId, 4, iconClass);
+        })
+      }
+    }, 0)
     // Static UI defaults
     $scope.userName = "DB ERROR";
     $scope.userJob = "DB ERROR";
@@ -67,6 +103,7 @@ newAtten.controller(
     jsons.onlines().then((data) => {
       $scope.getCollegueInfo = _.map(data, function (member, index) {
         return {
+          id: member.id,
           name: member.name,
           photo: member.photo,
           online: member.online,

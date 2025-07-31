@@ -40,8 +40,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'employees',
+    'daphne',
+    'channels',
     'rest_framework'
 ]
+
+ASGI_APPLICATION = "core.asgi.application"
+
+# This Channel Layer Exists To Choose for upcoming requests which protocol to serve value with
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
